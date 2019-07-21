@@ -1,4 +1,3 @@
-c:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\app.db
 C:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\EnergyApp.deps.json
 C:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\EnergyApp.runtimeconfig.json
 C:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\EnergyApp.runtimeconfig.dev.json
@@ -31,3 +30,4 @@ c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.Views.pdb
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.dll
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.pdb
 C:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.csproj.CopyComplete
+c:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\app.db
