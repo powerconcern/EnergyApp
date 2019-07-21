@@ -31,3 +31,8 @@ c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.dll
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.pdb
 C:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\EnergyApp.csproj.CopyComplete
 c:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\app.db
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Configuration\Create.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Configuration\Delete.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Configuration\Details.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Configuration\Edit.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Configuration\Index.g.cshtml.cs

@@ -2948,6 +2948,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Configuration\\Delete.cshtml",
+      "TargetPath": "Pages\\Configuration\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Privacy.cshtml",
       "TargetPath": "Pages\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -2955,6 +2960,16 @@
     {
       "FilePath": "Pages\\_ViewImports.cshtml",
       "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Configuration\\Details.cshtml",
+      "TargetPath": "Pages\\Configuration\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Configuration\\Index.cshtml",
+      "TargetPath": "Pages\\Configuration\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2973,8 +2988,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Configuration\\Edit.cshtml",
+      "TargetPath": "Pages\\Configuration\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Error.cshtml",
       "TargetPath": "Pages\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Configuration\\Create.cshtml",
+      "TargetPath": "Pages\\Configuration\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
