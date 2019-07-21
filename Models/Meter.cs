@@ -1,4 +1,4 @@
-namespace PowerConcern.Models
+namespace EnergyApp.Data
 {
     public enum Type
     {

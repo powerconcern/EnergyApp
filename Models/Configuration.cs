@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PowerConcern.Models
+namespace EnergyApp.Data
 {
     public class Configuration
     {
