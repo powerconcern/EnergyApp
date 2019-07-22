@@ -2948,6 +2948,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Meter\\Create.cshtml",
+      "TargetPath": "Pages\\Meter\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Delete.cshtml",
       "TargetPath": "Pages\\Configuration\\Delete.cshtml",
       "FileKind": "mvc"
@@ -2968,8 +2973,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Meter\\Edit.cshtml",
+      "TargetPath": "Pages\\Meter\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Meter\\Index.cshtml",
+      "TargetPath": "Pages\\Meter\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Index.cshtml",
       "TargetPath": "Pages\\Configuration\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Meter\\Delete.cshtml",
+      "TargetPath": "Pages\\Meter\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Meter\\Details.cshtml",
+      "TargetPath": "Pages\\Meter\\Details.cshtml",
       "FileKind": "mvc"
     },
     {

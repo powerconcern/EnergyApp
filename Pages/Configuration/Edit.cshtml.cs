@@ -29,7 +29,7 @@ namespace EnergyApp.Pages_Configuration
                 return NotFound();
             }
 
-            Configuration = await _context.Configurations.FirstOrDefaultAsync(m => m.ConfigurationID == id);
+            Configuration = await _context.Configurations.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Configuration == null)
             {
@@ -53,7 +53,7 @@ namespace EnergyApp.Pages_Configuration
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ConfigurationExists(Configuration.ConfigurationID))
+                if (!ConfigurationExists(Configuration.ID))
                 {
                     return NotFound();
                 }
@@ -68,7 +68,7 @@ namespace EnergyApp.Pages_Configuration
 
         private bool ConfigurationExists(int id)
         {
-            return _context.Configurations.Any(e => e.ConfigurationID == id);
+            return _context.Configurations.Any(e => e.ID == id);
         }
     }
 }

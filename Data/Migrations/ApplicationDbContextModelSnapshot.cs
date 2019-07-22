@@ -24,11 +24,29 @@ namespace EnergyApp.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("Value");
+                    b.Property<string>("Value");
 
                     b.HasKey("ConfigurationID");
 
                     b.ToTable("Configurations");
+                });
+
+            modelBuilder.Entity("EnergyApp.Data.Meter", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ChargerID");
+
+                    b.Property<float>("MaxCurrent");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("Type");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Meters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

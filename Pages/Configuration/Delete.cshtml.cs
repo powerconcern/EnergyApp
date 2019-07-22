@@ -28,7 +28,7 @@ namespace EnergyApp.Pages_Configuration
                 return NotFound();
             }
 
-            Configuration = await _context.Configurations.FirstOrDefaultAsync(m => m.ConfigurationID == id);
+            Configuration = await _context.Configurations.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Configuration == null)
             {

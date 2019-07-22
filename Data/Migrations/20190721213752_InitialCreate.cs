@@ -10,13 +10,14 @@ namespace EnergyApp.Data.Migrations
                 name: "Configurations",
                 columns: table => new
                 {
-                    ConfigurationID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Key = table.Column<string>(maxLength: 50, nullable: false),
-                    Value = table.Column<int>(nullable: false)
+                    Value = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Configurations", x => x.ConfigurationID);
+                    table.PrimaryKey("PK_Configurations", x => x.ID);
                 });
         }
 

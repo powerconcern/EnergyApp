@@ -15,6 +15,7 @@ namespace EnergyApp.Data
         }
 
         public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Meter> Meters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
