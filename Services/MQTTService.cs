@@ -29,7 +29,8 @@ namespace powerconcern.mqtt.services
         
         public IMqttClientOptions options;
         public float[] fMeanCurrent;
-        public float fMaxCurrent=16;
+        public float fMaxCurrent;
+        public float fChargeCurrent;
 
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
@@ -54,11 +55,14 @@ namespace powerconcern.mqtt.services
             {
                 var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-                //var test=dbContext.Configurations.Select(c=>c.Key).ToList();
                 sBrokerURL=dbContext.Configurations.First(c=>c.Key.Equals("BrokerURL")).Value;
+                fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
 
+            for(int i=1;i<4;i++) {
+                fMeanCurrent[i]=0;
+            }
             MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
             options = new MqttClientOptionsBuilder()
             .WithClientId(Guid.NewGuid().ToString())
@@ -105,7 +109,7 @@ namespace powerconcern.mqtt.services
                 //Logger.LogInformation(logstr);
                 Console.WriteLine(logstr);
                 if(e.ApplicationMessage.Topic.Contains("TEVCharger/status/current")) {
-                    
+                    fChargeCurrent=ToFloat(e.ApplicationMessage.Payload);
                 }
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {
                     //Save PNG to file
@@ -119,17 +123,27 @@ namespace powerconcern.mqtt.services
                 if(e.ApplicationMessage.Topic.Contains("current_l")) {
                     float fCurrent=ToFloat(e.ApplicationMessage.Payload);
                     int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
-                    fMeanCurrent[iPhase]=(4 * fMeanCurrent[iPhase]+fCurrent)/5;
+                    fMeanCurrent[iPhase]=(2 * fMeanCurrent[iPhase]+fCurrent)/3;
                     Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {fMeanCurrent[iPhase]}");
-
+                    float fNewChargeCurrent;
+                    //Calculate new value
                     if(fMeanCurrent[iPhase]>fMaxCurrent) {
-                        float fNewChargeCurrent=fMeanCurrent[iPhase]-fMaxCurrent;
-                        string sNewChargeCurrent=fNewChargeCurrent.ToString();
-                        Logger.LogInformation($"Holy Moses, too much power! Adjusting to {sNewChargeCurrent}");
-                        MqttClnt.PublishAsync("TestCharger/set/current",
-                                    sNewChargeCurrent,
-                                    MqttQualityOfServiceLevel.AtLeastOnce,
-                                    false);
+                        fNewChargeCurrent=fChargeCurrent-(fMeanCurrent[iPhase]-fMaxCurrent);
+                        Logger.LogInformation($"Holy Moses, {fMeanCurrent[iPhase]} is too much power!");
+                    
+                        //Round down
+                        fNewChargeCurrent=(int)fNewChargeCurrent;
+                        if(fNewChargeCurrent<2) {
+                            fNewChargeCurrent=0;
+                        }
+                        if(fChargeCurrent!=fNewChargeCurrent) {
+                            string sNewChargeCurrent=fNewChargeCurrent.ToString();
+                            Logger.LogInformation($"Adjusting down to {sNewChargeCurrent}");
+                            MqttClnt.PublishAsync("TEVCharger/set/current",
+                                        sNewChargeCurrent,
+                                        MqttQualityOfServiceLevel.AtLeastOnce,
+                                        false);
+                        }
                     }
                 }
             });
@@ -151,21 +165,39 @@ namespace powerconcern.mqtt.services
         {
             Logger.LogInformation("Background thread started");
 
-
             var result = await MqttClnt.ConnectAsync(options);
-            /*
-            var ctx = ServiceProvider.GetService<ApplicationDbContext>();
-            using (var ctx = ServiceProvider.GetService<ApplicationDbContext>())
-            {
-                var test=ctx.Configurations.Select(c=>c.Key).ToList();
-            }
-            using (var ctx = new ApplicationDbContext(_dbContextOptions))
-            {
-                var test=ctx.Configurations.Select(c=>c.Key).ToList();
-            }
- */
-
             Logger.LogInformation($"Connection result: {result.ResponseInformation}");
+
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                await Task.Delay(30000, stoppingToken);
+
+
+                //Check if we can increase the charge current
+                float fMaxMeanCurrent=0;
+                for(int i=1;i<4;i++) {
+                    if(fMeanCurrent[i]>fMaxMeanCurrent) {
+                        fMaxMeanCurrent=fMeanCurrent[i];
+                    }
+                }
+                if(fMaxMeanCurrent<fMaxCurrent) {
+                    float fNewChargeCurrent=fMaxCurrent-fMaxMeanCurrent;
+                    fNewChargeCurrent=(int)fNewChargeCurrent;
+                    if(fNewChargeCurrent<2) {
+                        fNewChargeCurrent=0;
+                    }
+                    if(fChargeCurrent!=fNewChargeCurrent) {
+                        string sNewChargeCurrent=fNewChargeCurrent.ToString();
+                        Logger.LogInformation($"Adjusting up to {sNewChargeCurrent}");
+                        await MqttClnt.PublishAsync("TEVCharger/set/current",
+                                    sNewChargeCurrent,
+                                    MqttQualityOfServiceLevel.AtLeastOnce,
+                                    false);
+                    }
+                }
+
+                Console.WriteLine("Background svc looping");
+            }
 
             stoppingToken.Register(() => Logger.LogDebug($" MQTTSvc background task is stopping."));
 
