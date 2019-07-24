@@ -16,7 +16,8 @@ namespace EnergyApp.Data
 
         public DbSet<Configuration> Configurations { get; set; }
         public DbSet<Meter> Meters { get; set; }
-
+        public DbSet<Charger> Chargers { get; set; }
+        public DbSet<Outlet> Outlets { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Configuration>(entity =>

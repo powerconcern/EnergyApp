@@ -1,15 +1,16 @@
 namespace EnergyApp.Data
 {
-    public enum Type
+    public enum OutletType
     {
         Type2, Schuko
     }
 
-    public class Meter
+    public class Outlet
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public float MaxCurrent { get; set; }
-        public Type? Type { get; set; }
+        public OutletType? Type { get; set; }
+        public Charger Charger { get; set; }
     }
 }
