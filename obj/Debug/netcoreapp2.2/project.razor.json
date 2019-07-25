@@ -2973,6 +2973,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Outlet\\Index.cshtml",
+      "TargetPath": "Pages\\Outlet\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Charger\\Create.cshtml",
+      "TargetPath": "Pages\\Charger\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Meter\\Edit.cshtml",
       "TargetPath": "Pages\\Meter\\Edit.cshtml",
       "FileKind": "mvc"
@@ -2983,8 +2993,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Charger\\Details.cshtml",
+      "TargetPath": "Pages\\Charger\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Index.cshtml",
       "TargetPath": "Pages\\Configuration\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Charger\\Edit.cshtml",
+      "TargetPath": "Pages\\Charger\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2995,6 +3015,11 @@
     {
       "FilePath": "Pages\\Meter\\Details.cshtml",
       "TargetPath": "Pages\\Meter\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Outlet\\Details.cshtml",
+      "TargetPath": "Pages\\Outlet\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -3013,6 +3038,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Outlet\\Create.cshtml",
+      "TargetPath": "Pages\\Outlet\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Edit.cshtml",
       "TargetPath": "Pages\\Configuration\\Edit.cshtml",
       "FileKind": "mvc"
@@ -3028,8 +3058,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Charger\\Index.cshtml",
+      "TargetPath": "Pages\\Charger\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Shared\\_LoginPartial.cshtml",
       "TargetPath": "Pages\\Shared\\_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Charger\\Delete.cshtml",
+      "TargetPath": "Pages\\Charger\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Outlet\\Delete.cshtml",
+      "TargetPath": "Pages\\Outlet\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -3040,6 +3085,11 @@
     {
       "FilePath": "Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Outlet\\Edit.cshtml",
+      "TargetPath": "Pages\\Outlet\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],

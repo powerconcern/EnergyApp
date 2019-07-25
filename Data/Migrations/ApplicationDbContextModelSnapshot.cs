@@ -25,6 +25,8 @@ namespace EnergyApp.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("OutletID");
+
                     b.HasKey("ID");
 
                     b.ToTable("Chargers");

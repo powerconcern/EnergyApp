@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergyApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190724084828_ChargerOutlet")]
+    [Migration("20190724212142_ChargerOutlet")]
     partial class ChargerOutlet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,8 @@ namespace EnergyApp.Data.Migrations
                     b.Property<float>("MaxCurrent");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("OutletID");
 
                     b.HasKey("ID");
 

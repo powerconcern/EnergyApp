@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace EnergyApp.Data
 {
     public class Customer
@@ -7,5 +9,7 @@ namespace EnergyApp.Data
         public string CustomerNumber { get; set; }
         public int MeterID { get; set; }
         public int ChargerID { get; set; }
+        public virtual ICollection<Charger> Chargers { get; set; }
+        public virtual ICollection<Meter> Meters { get; set; }
     }
 }

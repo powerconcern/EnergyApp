@@ -12,6 +12,7 @@ namespace EnergyApp.Data.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    OutletID = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     MaxCurrent = table.Column<float>(nullable: false)
                 },
@@ -55,6 +56,7 @@ namespace EnergyApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Chargers");
+
         }
     }
 }

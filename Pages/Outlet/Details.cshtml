@@ -1,0 +1,37 @@
+@page
+@model EnergyApp.Pages_Outlet.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Outlet</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Outlet.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Outlet.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Outlet.MaxCurrent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Outlet.MaxCurrent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Outlet.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Outlet.Type)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Outlet.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

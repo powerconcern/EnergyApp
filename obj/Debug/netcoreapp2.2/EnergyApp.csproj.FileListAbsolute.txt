@@ -41,3 +41,13 @@ c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Meter\Details.g.cshtml.cs
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Meter\Edit.g.cshtml.cs
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Meter\Index.g.cshtml.cs
 c:\Dev\EnergyApp\bin\Debug\netcoreapp2.2\app.db
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Outlet\Create.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Outlet\Delete.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Outlet\Details.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Outlet\Edit.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Outlet\Index.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Create.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Delete.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Details.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Edit.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Index.g.cshtml.cs
