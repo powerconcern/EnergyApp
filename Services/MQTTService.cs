@@ -63,7 +63,7 @@ namespace powerconcern.mqtt.services
             for(int i=1;i<4;i++) {
                 fMeanCurrent[i]=0;
             }
-            MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
+            //MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
             options = new MqttClientOptionsBuilder()
             .WithClientId(Guid.NewGuid().ToString())
             .WithTcpServer(sBrokerURL)
@@ -108,7 +108,7 @@ namespace powerconcern.mqtt.services
                 string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
                 //Logger.LogInformation(logstr);
                 Console.WriteLine(logstr);
-                if(e.ApplicationMessage.Topic.Contains("TEVCharger/status/current")) {
+                if(e.ApplicationMessage.Topic.Contains("EVCharger/status/current")) {
                     fChargeCurrent=ToFloat(e.ApplicationMessage.Payload);
                 }
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {
@@ -127,9 +127,9 @@ namespace powerconcern.mqtt.services
                     Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {fMeanCurrent[iPhase]}");
                     float fNewChargeCurrent;
                     //Calculate new value
-                    if(fMeanCurrent[iPhase]>fMaxCurrent) {
-                        fNewChargeCurrent=fChargeCurrent-(fMeanCurrent[iPhase]-fMaxCurrent);
-                        Logger.LogInformation($"Holy Moses, {fMeanCurrent[iPhase]} is too much power!");
+                    if(fCurrent>fMaxCurrent) {
+                        fNewChargeCurrent=fChargeCurrent-(fCurrent-fMaxCurrent);
+                        Logger.LogInformation($"Holy Moses, {fCurrent} is too much power!");
                     
                         //Round down
                         fNewChargeCurrent=(int)fNewChargeCurrent;
