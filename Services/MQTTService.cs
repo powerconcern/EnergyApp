@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,12 +23,14 @@ namespace powerconcern.mqtt.services
     {
         //private readonly DbContextOptions<ApplicationDbContext> _dbContextOptions;
         private readonly IServiceProvider _serviceProvider;
-
+        private ApplicationDbContext dbContext;
+        private List<Configuration> appConfig;
         public ILogger Logger { get; }
         public MqttFactory Factory { get; }
 
         public IMqttClient MqttClnt {get; }
         
+
         public IMqttClientOptions options;
         public float[] fMeanCurrent;
         public float fMaxCurrent;
@@ -39,7 +43,7 @@ namespace powerconcern.mqtt.services
             _serviceProvider=serviceProvider;
             fMeanCurrent=new float[4];
             
-            string sBrokerURL="";
+            string sBrokerURL, sBrokerUser, sBrokerPasswd="";
 
             Factory=new MqttFactory();
 
@@ -53,9 +57,14 @@ namespace powerconcern.mqtt.services
 
             using(var scope = _serviceProvider.CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+                dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-                sBrokerURL=dbContext.Configurations.First(c=>c.Key.Equals("BrokerURL")).Value;
+                //Read all of the config
+                appConfig=dbContext.Configurations.ToList();
+                
+                sBrokerURL=GetConfigString("BrokerURL");
+                //sBrokerUser=GetConfigString("BrokerUser");
+                //sBrokerPasswd=GetConfigString("BrokerPasswd");
                 fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
@@ -151,6 +160,14 @@ namespace powerconcern.mqtt.services
             Logger.LogInformation("MQTTService created");
         }
 
+        private string GetConfigString(string sKey) {
+            try {
+                var result=appConfig.First(c=>c.Key.Equals(sKey));
+                return result.Value;
+            } catch (Exception e) {
+                return e.Message;
+            }
+        }
         private float ToFloat(byte[] bArray) {
             string s=System.Text.Encoding.UTF8.GetString(bArray);
             float f=float.Parse(s.Replace('.',','));
@@ -248,6 +265,10 @@ namespace powerconcern.mqtt.services
             Console.WriteLine("Background svc is stopping.");
             
             //return Task.CompletedTask;
+        }
+
+        private class List<T1, T2, T3, T4>
+        {
         }
     }
 }
