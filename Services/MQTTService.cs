@@ -63,8 +63,8 @@ namespace powerconcern.mqtt.services
                 appConfig=dbContext.Configurations.ToList();
                 
                 sBrokerURL=GetConfigString("BrokerURL");
-                //sBrokerUser=GetConfigString("BrokerUser");
-                //sBrokerPasswd=GetConfigString("BrokerPasswd");
+                sBrokerUser=GetConfigString("BrokerUser");
+                sBrokerPasswd=GetConfigString("BrokerPasswd");
                 fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
@@ -76,7 +76,7 @@ namespace powerconcern.mqtt.services
             options = new MqttClientOptionsBuilder()
             .WithClientId(Guid.NewGuid().ToString())
             .WithTcpServer(sBrokerURL)
-            .WithCredentials("fredrik:fredrik", "aivUGL6no")
+            .WithCredentials(sBrokerUser, sBrokerPasswd)
             .WithCleanSession()
             .Build();
 
