@@ -2998,8 +2998,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Customer\\Edit.cshtml",
+      "TargetPath": "Pages\\Customer\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Index.cshtml",
       "TargetPath": "Pages\\Configuration\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Customer\\Details.cshtml",
+      "TargetPath": "Pages\\Customer\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -3038,6 +3048,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Customer\\Index.cshtml",
+      "TargetPath": "Pages\\Customer\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Outlet\\Create.cshtml",
       "TargetPath": "Pages\\Outlet\\Create.cshtml",
       "FileKind": "mvc"
@@ -3053,6 +3068,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Customer\\Create.cshtml",
+      "TargetPath": "Pages\\Customer\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Configuration\\Create.cshtml",
       "TargetPath": "Pages\\Configuration\\Create.cshtml",
       "FileKind": "mvc"
@@ -3065,6 +3085,11 @@
     {
       "FilePath": "Pages\\Shared\\_LoginPartial.cshtml",
       "TargetPath": "Pages\\Shared\\_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Pages\\Customer\\Delete.cshtml",
+      "TargetPath": "Pages\\Customer\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {

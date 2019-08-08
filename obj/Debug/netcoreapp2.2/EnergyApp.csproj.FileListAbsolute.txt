@@ -51,3 +51,8 @@ c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Delete.g.cshtml.cs
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Details.g.cshtml.cs
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Edit.g.cshtml.cs
 c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Charger\Index.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Customer\Create.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Customer\Delete.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Customer\Details.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Customer\Edit.g.cshtml.cs
+c:\Dev\EnergyApp\obj\Debug\netcoreapp2.2\Razor\Pages\Customer\Index.g.cshtml.cs
