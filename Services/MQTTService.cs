@@ -27,9 +27,7 @@ namespace powerconcern.mqtt.services
         private List<Configuration> appConfig;
         public ILogger Logger { get; }
         public MqttFactory Factory { get; }
-
         public IMqttClient MqttClnt {get; }
-        
 
         public IMqttClientOptions options;
         public float[] fMeanCurrent;
@@ -65,13 +63,18 @@ namespace powerconcern.mqtt.services
                 sBrokerURL=GetConfigString("BrokerURL");
                 sBrokerUser=GetConfigString("BrokerUser");
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
-                fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
+                try {
+                    fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
+                } catch(Exception e) {
+                    fMaxCurrent=-1;
+                }
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
 
             for(int i=1;i<4;i++) {
                 fMeanCurrent[i]=0;
             }
+
             //MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
             options = new MqttClientOptionsBuilder()
             .WithClientId(Guid.NewGuid().ToString())
