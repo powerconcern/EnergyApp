@@ -64,7 +64,7 @@ namespace EnergyApp.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("Type");
 
                     b.HasKey("ID");
 

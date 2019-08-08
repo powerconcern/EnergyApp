@@ -11,7 +11,7 @@ namespace EnergyApp.Data
         public int ChargerID { get; set; }
         public virtual ICollection<Charger> Chargers { get; set; }
         public virtual ICollection<Meter> Meters { get; set; }
-        public CustomerType Status { get; set; }
+        public CustomerType Type { get; set; }
     }
     public enum CustomerType
     {

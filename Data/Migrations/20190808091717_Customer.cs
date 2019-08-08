@@ -2,38 +2,32 @@
 
 namespace EnergyApp.Data.Migrations
 {
-    public partial class Meters : Migration
+    public partial class Customer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Meters",
+                name: "Customers",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
-                    MaxCurrent = table.Column<float>(nullable: false),
-                    Type = table.Column<int>(nullable: true),
+                    CustomerNumber = table.Column<string>(nullable: true),
+                    MeterID = table.Column<int>(nullable: false),
                     ChargerID = table.Column<int>(nullable: false),
-                    CustomerID = table.Column<int>(nullable: true)
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meters", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Meters_Customers_CustomerID",
-                        column: x => x.ChargerID,
-                        principalTable: "Customers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Customers", x => x.ID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Meters");
+                name: "Customers");
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergyApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190808072211_Customer")]
+    [Migration("20190808091717_Customer")]
     partial class Customer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace EnergyApp.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("Type");
 
                     b.HasKey("ID");
 
