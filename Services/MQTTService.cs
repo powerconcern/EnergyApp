@@ -19,6 +19,12 @@ using MQTTnet.Protocol;
 
 namespace powerconcern.mqtt.services
 {
+    public class ChargerInfo {
+        public float fCurrent;
+        public float[] fMeanCurrent;
+
+
+    }
     public class MQTTService: BackgroundService
     {
         //private readonly DbContextOptions<ApplicationDbContext> _dbContextOptions;
@@ -33,6 +39,7 @@ namespace powerconcern.mqtt.services
         public float[] fMeanCurrent;
         public float fMaxCurrent;
         public float fChargeCurrent;
+        public ChargerInfo 
 
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
@@ -66,6 +73,7 @@ namespace powerconcern.mqtt.services
                 try {
                     fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
                 } catch(Exception e) {
+                    Logger.LogWarning(e.Message);
                     fMaxCurrent=-1;
                 }
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
