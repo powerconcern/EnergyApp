@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\EnergyApp\\EnergyApp.csproj": {}
+    "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\EnergyApp\\EnergyApp.csproj": {
+    "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\EnergyApp\\EnergyApp.csproj",
+        "projectUniqueName": "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
         "projectName": "EnergyApp",
-        "projectPath": "C:\\Dev\\EnergyApp\\EnergyApp.csproj",
-        "packagesPath": "C:\\Users\\Tommy\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\EnergyApp\\obj\\",
+        "projectPath": "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
+        "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\lab\\EnergyApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tommy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\tomekh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
