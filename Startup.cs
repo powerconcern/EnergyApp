@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using powerconcern.mqtt.services;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace EnergyApp
 {
@@ -45,7 +47,15 @@ namespace EnergyApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IHostedService, MQTTService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config =>
+    {
+        // using Microsoft.AspNetCore.Mvc.Authorization;
+        // using Microsoft.AspNetCore.Authorization;
+        var policy = new AuthorizationPolicyBuilder()
+                         .RequireAuthenticatedUser()
+                         .Build();
+        config.Filters.Add(new AuthorizeFilter(policy));
+    }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
