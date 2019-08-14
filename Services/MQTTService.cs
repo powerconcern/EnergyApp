@@ -34,6 +34,13 @@ namespace powerconcern.mqtt.services
         public float fMaxCurrent;
         public float fChargeCurrent;
 
+        public Dictionary<string, Charger> diChargers;
+
+        public struct Charger {
+            string sCustomerID;
+
+        }
+
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
