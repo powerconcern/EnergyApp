@@ -74,6 +74,7 @@ namespace powerconcern.mqtt.services
                     fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
                 } catch(Exception e) {
                     fMaxCurrent=-1;
+                    Logger.LogInformation($"MaxCurrent error: {e.Message}");
                 }
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
