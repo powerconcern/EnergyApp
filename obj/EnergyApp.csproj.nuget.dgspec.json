@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {}
+    "c:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {
+    "c:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
+        "projectUniqueName": "c:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
         "projectName": "EnergyApp",
-        "projectPath": "C:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
+        "projectPath": "c:\\Dev\\lab\\EnergyApp\\EnergyApp.csproj",
         "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\lab\\EnergyApp\\obj\\",
+        "outputPath": "c:\\Dev\\lab\\EnergyApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

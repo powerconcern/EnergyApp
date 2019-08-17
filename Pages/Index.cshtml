@@ -10,5 +10,23 @@
     <p>User ID:@Model.userId</p>
     <br/>
     <p>Current charger amps:@Model.fMeanCurrent</p>
-    <p><a asp-page="/Meter/Index">Meter</a></p>
+    <p>Laddare för @Model.Customer.Name</p>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        @foreach (var item in Model.Customer.Chargers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </table>
+<p><a asp-page="/Meter/Index">Meter</a></p>
 </div>
