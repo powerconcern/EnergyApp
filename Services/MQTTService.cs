@@ -41,6 +41,13 @@ namespace powerconcern.mqtt.services
         public float fChargeCurrent;
         public ChargerInfo 
 
+        public Dictionary<string, Charger> diChargers;
+
+        public struct Charger {
+            string sCustomerID;
+
+        }
+
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
@@ -75,6 +82,7 @@ namespace powerconcern.mqtt.services
                 } catch(Exception e) {
                     Logger.LogWarning(e.Message);
                     fMaxCurrent=-1;
+                    Logger.LogInformation($"MaxCurrent error: {e.Message}");
                 }
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
