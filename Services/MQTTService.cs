@@ -34,14 +34,15 @@ namespace powerconcern.mqtt.services
         public ILogger Logger { get; }
         public MqttFactory Factory { get; }
         public IMqttClient MqttClnt {get; }
+        public Dictionary<string, Charger> DiChargers { get => diChargers; set => diChargers = value; }
 
         public IMqttClientOptions options;
         public float[] fMeanCurrent;
         public float fMaxCurrent;
         public float fChargeCurrent;
-        public ChargerInfo 
+        public ChargerInfo chargerInfo;
 
-        public Dictionary<string, Charger> diChargers;
+        private Dictionary<string, Charger> diChargers;
 
         public struct Charger {
             string sCustomerID;
@@ -134,6 +135,7 @@ namespace powerconcern.mqtt.services
                 //Console.WriteLine("### RECEIVED APPLICATION MESSAGE ###");
                 
                 string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                
                 //Logger.LogInformation(logstr);
                 Console.WriteLine(logstr);
                 if(e.ApplicationMessage.Topic.Contains("EVCharger/status/current")) {
