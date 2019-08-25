@@ -60,7 +60,7 @@ namespace EnergyApp.Pages
    */                                              
             //Get all chargers and outlets for the user
             
-            fMeanCurrent=((MQTTService)_mqttsvc).fMeanCurrent[1];
+            //fMeanCurrent=((MQTTService)_mqttsvc).fMeanCurrent[1];
         }
     }
 }

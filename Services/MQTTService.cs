@@ -19,12 +19,6 @@ using MQTTnet.Protocol;
 
 namespace powerconcern.mqtt.services
 {
-    public class ChargerInfo {
-        public float fCurrent;
-        public float[] fMeanCurrent;
-
-
-    }
     public class MQTTService: BackgroundService
     {
         //private readonly DbContextOptions<ApplicationDbContext> _dbContextOptions;
@@ -34,18 +28,27 @@ namespace powerconcern.mqtt.services
         public ILogger Logger { get; }
         public MqttFactory Factory { get; }
         public IMqttClient MqttClnt {get; }
-        public Dictionary<string, Charger> DiChargers { get => diChargers; set => diChargers = value; }
+        public Dictionary<string, MeterCache> DiChargers { get => diChargers; set => diChargers = value; }
 
         public IMqttClientOptions options;
-        public ChargerInfo chargerInfo;
 
-        private Dictionary<string, Charger> diChargers;
+        private Dictionary<string, MeterCache> meterLookup;
+        private Dictionary<string, ChargerCache> chargerLookup;
 
-        public struct Charger {
-            string sCustomerID;
+        public struct MeterCache {
+            public string sCustomerID;
             public float[] fMeanCurrent;
             public float fMaxCurrent;
+            public float[] fMeterCurrent;
+
+            public ICollection<ChargerCache> chargers;
+        }
+
+        public struct ChargerCache {
+            public string sCustomerID;
+            public float fMaxCurrent;
             public float fChargeCurrent;
+            public int iPhase;
         }
 
         //automatically passes the logger factory in to the constructor via dependency injection
@@ -77,8 +80,32 @@ namespace powerconcern.mqtt.services
                 sBrokerURL=GetConfigString("BrokerURL");
                 sBrokerUser=GetConfigString("BrokerUser");
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
+
                 try {
-                    fMaxCurrent=dbContext.Meters.First(c=>c.Name.Equals("FredriksMätare")).MaxCurrent;
+                    var customers=dbContext.Customers;
+                    foreach (var cuitem in customers)
+                    {
+                        var meters=dbContext.Meters;
+                        foreach (var meitem in meters)
+                        {
+                            MeterCache meterCache=new MeterCache();
+
+                            meterCache.sCustomerID=cuitem.CustomerNumber;
+                            meterCache.fMaxCurrent=meitem.MaxCurrent;
+
+                            var chargers=dbContext.Chargers;
+                            foreach (var chitem in chargers)
+                            {
+                                ChargerCache chargerCache=new ChargerCache();
+                                chargerCache.sCustomerID=cuitem.CustomerNumber;
+                                chargerCache.fMaxCurrent=chitem.MaxCurrent;
+                                chargerLookup.Add(chitem.Name, chargerCache);
+                                meterCache.chargers.Add(chargerCache); 
+                            }
+
+                            meterLookup.Add(meitem.Name, meterCache);
+                        }
+                    }
                 } catch(Exception e) {
                     Logger.LogWarning(e.Message);
                     fMaxCurrent=-1;
