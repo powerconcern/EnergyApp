@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EnergyApp.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EnergyApp.Pages_Configuration
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly EnergyApp.Data.ApplicationDbContext _context;

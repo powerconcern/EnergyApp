@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using powerconcern.mqtt.services;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace EnergyApp
@@ -49,6 +48,13 @@ namespace EnergyApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IHostedService, MQTTService>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireInstallerRole", policy => policy.RequireRole("Installer"));
+                options.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
+            });
+
             services.AddMvc(config =>
             {
                 // using Microsoft.AspNetCore.Mvc.Authorization;
@@ -58,11 +64,20 @@ namespace EnergyApp
                                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             })
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Configuration", "RequireAdminRole");
+                options.Conventions.AuthorizePage("/Configuration/Index", "RequireAdminRole");
+                options.Conventions.AuthorizePage("/Customer", "RequireCustomerRole");
+
+            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                                Microsoft.AspNetCore.Hosting.IHostingEnvironment env,
+                                IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -83,6 +98,41 @@ namespace EnergyApp
             app.UseAuthentication();
 
             app.UseMvc();
+
+            CreateRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles 
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            string[] roleNames = { "Admin", "Installer", "Customer" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database: Question 1
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            IdentityUser user = await UserManager.FindByEmailAsync("tommy.ekh@gmail.com");  
+  
+            if (user == null)  
+            {  
+                user = new IdentityUser()  
+                {  
+                    UserName = "testuser@gmail.com",  
+                    Email = "testuser@gmail.com",  
+                };  
+                await UserManager.CreateAsync(user, "Test@123");  
+            }  
+            await UserManager.AddToRoleAsync(user, "Admin");  
         }
     }
 }
