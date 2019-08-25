@@ -13,7 +13,7 @@ using EnergyApp.Data;
 
 namespace EnergyApp.Pages
 {
-    [AllowAnonymous]
+//    [AllowAnonymous]
     public class IndexModel : PageModel
     {
         private IHostedService _mqttsvc;
