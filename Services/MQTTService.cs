@@ -28,8 +28,7 @@ namespace powerconcern.mqtt.services
         public ILogger Logger { get; }
         public MqttFactory Factory { get; }
         public IMqttClient MqttClnt {get; }
-        public Dictionary<string, MeterCache> DiChargers { get => diChargers; set => diChargers = value; }
-
+        
         public IMqttClientOptions options;
 
         private Dictionary<string, MeterCache> meterLookup;
@@ -51,12 +50,16 @@ namespace powerconcern.mqtt.services
             public int iPhase;
         }
 
+        private float fChargeCurrent, fMaxCurrent;
+        private float[] fMeanCurrent;
+
+
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             //Get serviceprovider so we later can connect to databasemodel from it.
             _serviceProvider=serviceProvider;
-            fMeanCurrent=new float[4];
+            //fMeanCurrent=new float[4];
             
             string sBrokerURL, sBrokerUser, sBrokerPasswd="";
 
@@ -108,14 +111,14 @@ namespace powerconcern.mqtt.services
                     }
                 } catch(Exception e) {
                     Logger.LogWarning(e.Message);
-                    fMaxCurrent=-1;
+                    //fMaxCurrent=-1;
                     Logger.LogInformation($"MaxCurrent error: {e.Message}");
                 }
                 Logger.LogInformation($"BrokerURL:{sBrokerURL}");
             }
 
             for(int i=1;i<4;i++) {
-                fMeanCurrent[i]=0;
+                //fMeanCurrent[i]=0;
             }
 
             //MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
@@ -132,11 +135,11 @@ namespace powerconcern.mqtt.services
             {
                 Console.WriteLine("### CONNECTED WITH SERVER ###");
 
-                // Subscribe to a topic
-                await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("CurrentMeter/#").Build());
-                await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("TEVCharger/#").Build());
+                // Subscribe to topics
+                await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("+/status/#").Build());
+                await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("+/set/#").Build());
 
-                Console.WriteLine("### SUBSCRIBED ###");
+                Console.WriteLine("### SUBSCRIBED to ###");
             });
             #endregion
 
@@ -144,15 +147,13 @@ namespace powerconcern.mqtt.services
             {
                 Console.WriteLine("### DISCONNECTED FROM SERVER ###");
                 await Task.Delay(TimeSpan.FromSeconds(5));
-                if(fMeanCurrent[1]>0) {
-                    try
-                    {
-                        await MqttClnt.ConnectAsync(options);
-                    }
-                    catch
-                    {
-                        Console.WriteLine("### RECONNECTING FAILED ###");
-                    }
+                try
+                {
+                    await MqttClnt.ConnectAsync(options);
+                }
+                catch
+                {
+                    Console.WriteLine("### RECONNECTING FAILED ###");
                 }
             });
 
@@ -162,8 +163,9 @@ namespace powerconcern.mqtt.services
                 
                 string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
 
-                //TODO Find customer from chargerid
-                
+                //TODO Find charger from chargername or meter from metername
+                string[] topic=e.ApplicationMessage.Topic.Split('/');
+                var charger=meterLookup[topic[0]];
 
                 //TODO Check current from the highest meter to the charger
                 
