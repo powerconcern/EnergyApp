@@ -31,23 +31,17 @@ namespace powerconcern.mqtt.services
         
         public IMqttClientOptions options;
 
-        private Dictionary<string, MeterCache> meterLookup;
-        private Dictionary<string, ChargerCache> chargerLookup;
+        private Dictionary<string, MeterChargerCache> cmLookup;
+        public enum CacheType {Charger, Meter};
 
-        public struct MeterCache {
+        public struct MeterChargerCache {
+            public CacheType cacheType;
             public string sCustomerID;
             public float[] fMeanCurrent;
             public float fMaxCurrent;
             public float[] fMeterCurrent;
-
-            public ICollection<ChargerCache> chargers;
-        }
-
-        public struct ChargerCache {
-            public string sCustomerID;
-            public float fMaxCurrent;
-            public float fChargeCurrent;
             public int iPhase;
+            public ICollection<MeterChargerCache> meterchargers;
         }
 
         private float fChargeCurrent, fMaxCurrent;
@@ -62,6 +56,8 @@ namespace powerconcern.mqtt.services
             //fMeanCurrent=new float[4];
             
             string sBrokerURL, sBrokerUser, sBrokerPasswd="";
+
+            cmCache=new MeterCache();
 
             Factory=new MqttFactory();
 
@@ -91,10 +87,10 @@ namespace powerconcern.mqtt.services
                         var meters=dbContext.Meters;
                         foreach (var meitem in meters)
                         {
-                            MeterCache meterCache=new MeterCache();
-
-                            meterCache.sCustomerID=cuitem.CustomerNumber;
-                            meterCache.fMaxCurrent=meitem.MaxCurrent;
+                            MeterChargerCache meterChargerCache=new MeterChargerCache();
+                            meterChargerCache.sCustomerID=cuitem.CustomerNumber;
+                            meterChargerCache.fMaxCurrent=meitem.MaxCurrent;
+                            cmLookup.Add(meterChargerCache);
 
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
