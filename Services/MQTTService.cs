@@ -31,7 +31,7 @@ namespace powerconcern.mqtt.services
         
         public IMqttClientOptions options;
 
-        private Dictionary<string, MeterChargerCache> cmLookup;
+        private Dictionary<string, MeterChargerCache> mccLookup;
         public enum CacheType {Charger, Meter};
 
         public struct MeterChargerCache {
@@ -41,7 +41,8 @@ namespace powerconcern.mqtt.services
             public float fMaxCurrent;
             public float[] fMeterCurrent;
             public int iPhase;
-            public ICollection<MeterChargerCache> meterchargers;
+            public MeterChargerCache mccParent;
+            public ICollection<MeterChargerCache> mccChildren;
         }
 
         private float fChargeCurrent, fMaxCurrent;
@@ -56,8 +57,6 @@ namespace powerconcern.mqtt.services
             //fMeanCurrent=new float[4];
             
             string sBrokerURL, sBrokerUser, sBrokerPasswd="";
-
-            cmCache=new MeterCache();
 
             Factory=new MqttFactory();
 
@@ -87,10 +86,10 @@ namespace powerconcern.mqtt.services
                         var meters=dbContext.Meters;
                         foreach (var meitem in meters)
                         {
-                            MeterChargerCache meterChargerCache=new MeterChargerCache();
-                            meterChargerCache.sCustomerID=cuitem.CustomerNumber;
-                            meterChargerCache.fMaxCurrent=meitem.MaxCurrent;
-                            cmLookup.Add(meterChargerCache);
+                            MeterChargerCache mcCache=new MeterChargerCache().cacheType=CacheType.Meter;
+                            mcCache.sCustomerID=cuitem.CustomerNumber;
+                            mcCache.fMaxCurrent=meitem.MaxCurrent;
+                            mccLookup.Add(meitem, mcCache);
 
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
