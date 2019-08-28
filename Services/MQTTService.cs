@@ -32,16 +32,15 @@ namespace powerconcern.mqtt.services
         public IMqttClientOptions options;
 
         private Dictionary<string, MeterChargerCache> mccLookup;
-        public enum CacheType {Charger, Meter};
 
-        public struct MeterChargerCache {
-            public CacheType cacheType;
+        public enum CacheType {ChargerType, MeterType};
+        public class MeterChargerCache {
+            public CacheType ccType;
             public string sCustomerID;
             public float[] fMeanCurrent;
             public float fMaxCurrent;
             public float[] fMeterCurrent;
             public int iPhase;
-            public MeterChargerCache mccParent;
             public ICollection<MeterChargerCache> mccChildren;
         }
 
@@ -80,23 +79,30 @@ namespace powerconcern.mqtt.services
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
 
                 try {
+                    MeterChargerCache mcCache;
                     var customers=dbContext.Customers;
                     foreach (var cuitem in customers)
                     {
                         var meters=dbContext.Meters;
                         foreach (var meitem in meters)
                         {
-                            MeterChargerCache mcCache=new MeterChargerCache().cacheType=CacheType.Meter;
+                            mcCache=new MeterChargerCache();
+
+                            mcCache.ccType=CacheType.MeterType;
                             mcCache.sCustomerID=cuitem.CustomerNumber;
                             mcCache.fMaxCurrent=meitem.MaxCurrent;
-                            mccLookup.Add(meitem, mcCache);
+                            mccLookup.Add(meitem.Name, mcCache);
 
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
                             {
-                                ChargerCache chargerCache=new ChargerCache();
-                                chargerCache.sCustomerID=cuitem.CustomerNumber;
-                                chargerCache.fMaxCurrent=chitem.MaxCurrent;
+                                mcCache=new MeterChargerCache();
+
+                                mcCache.ccType=CacheType.ChargerType;
+                                mcCache.sCustomerID=cuitem.CustomerNumber;
+                                mcCache.fMaxCurrent=meitem.MaxCurrent;
+                                mccLookup.Add(meitem.Name, mcCache);
+                                
                                 chargerLookup.Add(chitem.Name, chargerCache);
                                 meterCache.chargers.Add(chargerCache); 
                             }
