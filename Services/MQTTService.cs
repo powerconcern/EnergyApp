@@ -41,6 +41,7 @@ namespace powerconcern.mqtt.services
             public float fMaxCurrent;
             public float[] fMeterCurrent;
             public int iPhase;
+            public MeterChargerCache mccParent;
             public ICollection<MeterChargerCache> mccChildren;
         }
 
@@ -54,7 +55,7 @@ namespace powerconcern.mqtt.services
             //Get serviceprovider so we later can connect to databasemodel from it.
             _serviceProvider=serviceProvider;
             //fMeanCurrent=new float[4];
-            
+            mccLookup=new Dictionary<string, MeterChargerCache>();            
             string sBrokerURL, sBrokerUser, sBrokerPasswd="";
 
             Factory=new MqttFactory();
@@ -79,35 +80,31 @@ namespace powerconcern.mqtt.services
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
 
                 try {
-                    MeterChargerCache mcCache;
+                    MeterChargerCache chargerCache,meterCache;
                     var customers=dbContext.Customers;
                     foreach (var cuitem in customers)
                     {
                         var meters=dbContext.Meters;
                         foreach (var meitem in meters)
                         {
-                            mcCache=new MeterChargerCache();
+                            meterCache=new MeterChargerCache();
 
-                            mcCache.ccType=CacheType.MeterType;
-                            mcCache.sCustomerID=cuitem.CustomerNumber;
-                            mcCache.fMaxCurrent=meitem.MaxCurrent;
-                            mccLookup.Add(meitem.Name, mcCache);
+                            meterCache.ccType=CacheType.MeterType;
+                            meterCache.sCustomerID=cuitem.CustomerNumber;
+                            meterCache.fMaxCurrent=meitem.MaxCurrent;
+                            mccLookup.Add(meitem.Name, meterCache);
 
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
                             {
-                                mcCache=new MeterChargerCache();
+                                chargerCache=new MeterChargerCache();
 
-                                mcCache.ccType=CacheType.ChargerType;
-                                mcCache.sCustomerID=cuitem.CustomerNumber;
-                                mcCache.fMaxCurrent=meitem.MaxCurrent;
-                                mccLookup.Add(meitem.Name, mcCache);
-                                
-                                chargerLookup.Add(chitem.Name, chargerCache);
-                                meterCache.chargers.Add(chargerCache); 
+                                chargerCache.ccType=CacheType.ChargerType;
+                                chargerCache.sCustomerID=cuitem.CustomerNumber;
+                                chargerCache.fMaxCurrent=chitem.MaxCurrent;
+                                chargerCache.mccParent=meterCache;
+                                mccLookup.Add(chitem.Name, chargerCache);
                             }
-
-                            meterLookup.Add(meitem.Name, meterCache);
                         }
                     }
                 } catch(Exception e) {
@@ -166,7 +163,7 @@ namespace powerconcern.mqtt.services
 
                 //TODO Find charger from chargername or meter from metername
                 string[] topic=e.ApplicationMessage.Topic.Split('/');
-                var charger=meterLookup[topic[0]];
+                var charger=mccLookup[topic[0]];
 
                 //TODO Check current from the highest meter to the charger
                 
