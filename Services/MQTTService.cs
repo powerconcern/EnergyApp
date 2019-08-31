@@ -31,21 +31,26 @@ namespace powerconcern.mqtt.services
         
         public IMqttClientOptions options;
 
-        private Dictionary<string, MeterChargerCache> mccLookup;
+        public class PowerCache {
+            public string sCustomerID {get; set;}
+            public float fMaxCurrent;
+            public PowerCache mccParent;
+            public ICollection<PowerCache> mccChildren;
+        }
+        private Dictionary<string, PowerCache> mccLookup;
 
         public enum CacheType {ChargerType, MeterType};
-        public class MeterChargerCache {
-            public CacheType ccType;
-            public string sCustomerID;
+        public class MeterCache :PowerCache {
             public float[] fMeanCurrent;
-            public float fMaxCurrent;
             public float[] fMeterCurrent;
             public int iPhase;
-            public MeterChargerCache mccParent;
-            public ICollection<MeterChargerCache> mccChildren;
         }
 
-        private float fChargeCurrent, fMaxCurrent;
+        public class ChargerCache :PowerCache {
+            public float fSetCurrent;
+        }
+
+        //private float fChargeCurrent, fMaxCurrent;
         private float[] fMeanCurrent;
 
 
@@ -54,8 +59,9 @@ namespace powerconcern.mqtt.services
         {
             //Get serviceprovider so we later can connect to databasemodel from it.
             _serviceProvider=serviceProvider;
+
             //fMeanCurrent=new float[4];
-            mccLookup=new Dictionary<string, MeterChargerCache>();            
+            mccLookup=new Dictionary<string, PowerCache>();     
             string sBrokerURL, sBrokerUser, sBrokerPasswd="";
 
             Factory=new MqttFactory();
@@ -80,16 +86,15 @@ namespace powerconcern.mqtt.services
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
 
                 try {
-                    MeterChargerCache chargerCache,meterCache;
+                    PowerCache chargerCache,meterCache;
                     var customers=dbContext.Customers;
                     foreach (var cuitem in customers)
                     {
                         var meters=dbContext.Meters;
                         foreach (var meitem in meters)
                         {
-                            meterCache=new MeterChargerCache();
+                            meterCache=new MeterCache();
 
-                            meterCache.ccType=CacheType.MeterType;
                             meterCache.sCustomerID=cuitem.CustomerNumber;
                             meterCache.fMaxCurrent=meitem.MaxCurrent;
                             mccLookup.Add(meitem.Name, meterCache);
@@ -97,9 +102,8 @@ namespace powerconcern.mqtt.services
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
                             {
-                                chargerCache=new MeterChargerCache();
+                                chargerCache=new ChargerCache();
 
-                                chargerCache.ccType=CacheType.ChargerType;
                                 chargerCache.sCustomerID=cuitem.CustomerNumber;
                                 chargerCache.fMaxCurrent=chitem.MaxCurrent;
                                 chargerCache.mccParent=meterCache;
@@ -159,20 +163,68 @@ namespace powerconcern.mqtt.services
             {
                 //Console.WriteLine("### RECEIVED APPLICATION MESSAGE ###");
                 
-                string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                string logstr=$"{DateTime.Now} Client {e.ClientId} : {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                Logger.LogInformation(logstr);
 
                 //TODO Find charger from chargername or meter from metername
                 string[] topic=e.ApplicationMessage.Topic.Split('/');
-                var charger=mccLookup[topic[0]];
+                var mc=mccLookup[topic[0]];
+                //TODO What happens if not found
 
                 //TODO Check current from the highest meter to the charger
-                
+                if(mc is MeterCache) {
+                    MeterCache mCache=(MeterCache)mc;
+                    if(e.ApplicationMessage.Topic.Contains("current_l")) {
+                        //Get info in temp vars
+                        var fCurrent=ToFloat(e.ApplicationMessage.Payload);
+                        int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
 
-                //Logger.LogInformation(logstr);
-                Console.WriteLine(logstr);
-                if(e.ApplicationMessage.Topic.Contains("EVCharger/status/current")) {
-                    fChargeCurrent=ToFloat(e.ApplicationMessage.Payload);
+                        //Store in cache
+                        mCache.fMeterCurrent[iPhase]=fCurrent;
+                        mCache.fMeanCurrent[iPhase]=(2 * mCache.fMeanCurrent[iPhase]+fCurrent)/3;
+                        Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}");
+                        float fNewChargeCurrent;
+                        //Calculate new value
+                        if(fCurrent>mCache.fMeterCurrent[iPhase]) {
+                            //What's the overcurrent?
+                            float fOverCurrent=fCurrent-mCache.fMaxCurrent;
+                            Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much!");
+
+                            //TODO Set new current
+                            //Number of chargers to even out on
+
+                            //TODO select only chargers
+                            int iChargers=mCache.mccChildren.Count;
+                            fNewChargeCurrent=(mCache.fMaxCurrent-fOverCurrent)/iChargers;
+
+                            //Round down
+                            fNewChargeCurrent=(int)fNewChargeCurrent;
+                            if(fNewChargeCurrent<2) {
+                                fNewChargeCurrent=0;
+                            }
+                            
+                            string sNewChargeCurrent=fNewChargeCurrent.ToString();
+                        
+                            foreach(PowerCache pc in mCache.mccChildren) {
+                                if(fChargeCurrent!=fNewChargeCurrent) {
+                                    Logger.LogInformation($"Adjusting down to {sNewChargeCurrent}");
+                                    MqttClnt.PublishAsync("TEVCharger/set/current",
+                                                sNewChargeCurrent,
+                                                MqttQualityOfServiceLevel.AtLeastOnce,
+                                                false);
+                                }
+                            }
+                        }
+                    }
+
                 }
+                else if(mc is ChargerCache) {
+                    var cCache=(ChargerCache)mc;
+                    if(e.ApplicationMessage.Topic.Contains("/status/current")) {
+                        cCache.fSetCurrent=ToFloat(e.ApplicationMessage.Payload);
+                    }
+                }
+
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {
                     //Save PNG to file
                     
@@ -182,32 +234,7 @@ namespace powerconcern.mqtt.services
                     //bw.Flush();
                     bw.Close();
                 }
-                if(e.ApplicationMessage.Topic.Contains("current_l")) {
-                    float fCurrent=ToFloat(e.ApplicationMessage.Payload);
-                    int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
-                    fMeanCurrent[iPhase]=(2 * fMeanCurrent[iPhase]+fCurrent)/3;
-                    Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {fMeanCurrent[iPhase]}");
-                    float fNewChargeCurrent;
-                    //Calculate new value
-                    if(fCurrent>fMaxCurrent) {
-                        fNewChargeCurrent=fChargeCurrent-(fCurrent-fMaxCurrent);
-                        Logger.LogInformation($"Holy Moses, {fCurrent} is too much power!");
-                    
-                        //Round down
-                        fNewChargeCurrent=(int)fNewChargeCurrent;
-                        if(fNewChargeCurrent<2) {
-                            fNewChargeCurrent=0;
-                        }
-                        if(fChargeCurrent!=fNewChargeCurrent) {
-                            string sNewChargeCurrent=fNewChargeCurrent.ToString();
-                            Logger.LogInformation($"Adjusting down to {sNewChargeCurrent}");
-                            MqttClnt.PublishAsync("TEVCharger/set/current",
-                                        sNewChargeCurrent,
-                                        MqttQualityOfServiceLevel.AtLeastOnce,
-                                        false);
-                        }
-                    }
-                }
+
             });
 
             Logger.LogInformation("MQTTService created");
