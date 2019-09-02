@@ -53,6 +53,10 @@ namespace powerconcern.mqtt.services
             public float[] fMeterCurrent;
             //public int iPhase;
             public bool bCurrentAdd;
+
+            public float GetMaxPhaseCurrent() {
+                return fMeanCurrent.Min();
+            }
         }
 
         public class ChargerCache :BaseCache {
@@ -61,12 +65,11 @@ namespace powerconcern.mqtt.services
             public bool bConnected;
 
             public int iPhases=0;
-            internal string GetNewCurrent()
+            public string GetNewCurrent()
             {
-                float fCurrentMax=((MeterCache)bcParent).fMeanCurrent.Max();
-                foreach(float f in ((MeterCache)bcParent).fMeanCurrent) {
+                float fCurrentMax=((MeterCache)bcParent).GetMaxPhaseCurrent();
+                
 
-                }
                 //Least current to increase with
                 return fCurrentMax.ToString();
             }
