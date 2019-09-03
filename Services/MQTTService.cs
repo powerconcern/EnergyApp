@@ -54,8 +54,24 @@ namespace powerconcern.mqtt.services
             //public int iPhase;
             public bool bCurrentAdd;
 
-            public float GetMaxPhaseCurrent() {
-                return fMeanCurrent.Min();
+            /**Return max meancurrent for the incoming phases 
+            iPhases = phases in binary form */
+            public float GetMaxPhaseAddCurrent(int iPhases) {
+                float fMax=0;
+                int iPhase=3;
+                
+                for (int iPowTwo = 4; iPowTwo > 0 ; iPowTwo/=2)
+                {
+                    if(iPhases>=iPowTwo) {
+                        //Valid phase - use in calculation
+                        if(fMeanCurrent[iPhase]>fMax) {
+                            fMax=fMeanCurrent[iPhase];
+                        }
+                        iPhase--;
+                        iPhases-=iPowTwo;
+                    }
+                }
+                return fMaxCurrent-fMax;
             }
         }
 
@@ -65,19 +81,16 @@ namespace powerconcern.mqtt.services
             public bool bConnected;
 
             public int iPhases=0;
-            public string GetNewCurrent()
+            public string GetNewChargeCurrent()
             {
-                float fCurrentMax=((MeterCache)bcParent).GetMaxPhaseCurrent();
-                
+                float fCurrentMaxAdd=((MeterCache)bcParent).GetMaxPhaseAddCurrent(iPhases);
+                //Current to increase with
+                float fNewChargeCurrent=fCurrentSet+fCurrentMaxAdd;
 
-                //Least current to increase with
-                return fCurrentMax.ToString();
+                //Max current to increase with
+                return fNewChargeCurrent.ToString("0");
             }
         }
-
-        //private float fChargeCurrent, fMaxCurrent;
-        private float[] fMeanCurrent;
-
 
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
@@ -309,20 +322,25 @@ namespace powerconcern.mqtt.services
                     if(cCache is ChargerCache) {
                         ChargerCache cc = (ChargerCache)cCache;
                         //TODO Look per phase for possible current adjustments
-                        string sNewChargeCurrent = cc.GetNewCurrent(cCache);
+                        string sNewChargeCurrent = cc.GetNewChargeCurrent();
 
-                        if(sNewChargeCurrent != null) {
-                            Logger.LogInformation($"Adjusting down to {sNewChargeCurrent}");
-                            await MqttClnt.PublishAsync($"{cCache.sName}/set/current",
-                                        sNewChargeCurrent,
-                                        MqttQualityOfServiceLevel.AtLeastOnce,
-                                        false);
-                            
-                            //Get info in temp vars
-                            //var fCurrent=ToFloat(e.ApplicationMessage.Payload);
-                            //int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
+                        if(cc.bConnected) {
+                            if(sNewChargeCurrent != null) {
+                                Logger.LogInformation($"Adjusting up to {sNewChargeCurrent}");
+                                await MqttClnt.PublishAsync($"{cc.sName}/set/current",
+                                            sNewChargeCurrent,
+                                            MqttQualityOfServiceLevel.AtLeastOnce,
+                                            false);
+                                
+                                //Get info in temp vars
+                                //var fCurrent=ToFloat(e.ApplicationMessage.Payload);
+                                //int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
+                            }
+                        } 
+                        else
+                        {
+                            Logger.LogInformation($"Could turn {cc.sName} to {sNewChargeCurrent}A");
                         }
-                        
                     }
                 }
                 Console.WriteLine("Background svc looping");
@@ -377,10 +395,6 @@ namespace powerconcern.mqtt.services
             Console.WriteLine("Background svc is stopping.");
             
             //return Task.CompletedTask;
-        }
-
-        private class List<T1, T2, T3, T4>
-        {
         }
     }
 }
