@@ -1,0 +1,11 @@
+C:\Dev\lab\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.deps.json
+C:\Dev\lab\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.runtimeconfig.json
+C:\Dev\lab\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.runtimeconfig.dev.json
+c:\Dev\lab\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.dll
+c:\Dev\lab\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.pdb
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.csprojAssemblyReference.cache
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.csproj.CoreCompileInputs.cache
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyInfoInputs.cache
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyInfo.cs
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.dll
+c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.pdb

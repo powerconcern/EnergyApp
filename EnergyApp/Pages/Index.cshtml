@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "PowerConcern";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SiteInfo</h1>
+    <br/>
+    <p>User ID:@Model.userId</p>
+    <br/>
+    <p>Current charger amps:@Model.fMeanCurrent</p>
+    <br/>
+    <p>Meter(s) for @Model.Customer.Name</p>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>L1</th>
+            <th>L2</th>
+            <th>L3</th>
+        </tr>
+        @foreach (var item in Model.meterCacheList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fMeanCurrent[1])
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fMeanCurrent[2])
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fMeanCurrent[3])
+                </td>
+            </tr>
+        }
+    </table>
+<p><a asp-page="/Meter/Index">Meter</a></p>
+</div>
