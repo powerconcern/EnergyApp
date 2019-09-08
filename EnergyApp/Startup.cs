@@ -109,10 +109,10 @@ namespace EnergyApp
             var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
             string[] roleNames = { "Admin", "Installer", "Customer" };
             IdentityResult roleResult;
+            IdentityUser user;
 
             foreach (var roleName in roleNames)
             {
-                
                 var roleExist = await RoleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
                 {
@@ -121,18 +121,30 @@ namespace EnergyApp
                 }
             }
 
-            IdentityUser user = await UserManager.FindByEmailAsync("tommy.ekh@gmail.com");  
-  
-            if (user == null)  
-            {  
-                user = new IdentityUser()  
+
+            List<string> AdmUsers=new List<string>{"tommy@powerconcern.se","tommy.ekh@gmail.com","fredrik@powerconcern.se"};
+            foreach (var admUser in AdmUsers)
+            {
+                user = await UserManager.FindByEmailAsync(admUser);  
+        
+                if (user == null)  
                 {  
-                    UserName = "testuser@gmail.com",  
-                    Email = "testuser@gmail.com",  
-                };  
-                await UserManager.CreateAsync(user, "Test@123");  
-            }  
-            await UserManager.AddToRoleAsync(user, "Admin");  
+                    user = new IdentityUser()  
+                    {  
+                        UserName = "testuser@gmail.com",  
+                        Email = "testuser@gmail.com",  
+                    };  
+                    await UserManager.CreateAsync(user, "Test@123");  
+                }  
+                await UserManager.AddToRoleAsync(user, "Admin");  
+            }
+
+            /*
+            user = await UserManager.FindByEmailAsync("fredrik@powerconcern.se");
+            var token = await UserManager.GeneratePasswordResetTokenAsync(user);
+            var result = await UserManager.ResetPasswordAsync(user, token, "");
+            Console.WriteLine(result);
+            */
         }
     }
 }

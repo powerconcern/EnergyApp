@@ -53,11 +53,12 @@ namespace EnergyApp.Pages
 //                        .ThenInclude(e => e.Course)
                     .AsNoTracking()
                     .FirstOrDefault(m => m.CustomerNumber == userId);
-
-            foreach (var meter in Customer.Meters)
-            {   
-                MeterCache meterCache=(MeterCache)((MQTTService)_mqttsvc).GetBaseCache(meter.Name);
-                meterCacheList.Add(meterCache);
+            if(Customer != null) {
+                foreach (var meter in Customer.Meters)
+                {   
+                    MeterCache meterCache=(MeterCache)((MQTTService)_mqttsvc).GetBaseCache(meter.Name);
+                    meterCacheList.Add(meterCache);
+                }
             }
 /*            var chargers=   from charger in _context.Chargers
                             join meter in _context.Meters on charger.ID equals meter.ChargerID

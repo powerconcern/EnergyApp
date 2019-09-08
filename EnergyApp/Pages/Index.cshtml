@@ -11,31 +11,36 @@
     <br/>
     <p>Current charger amps:@Model.fMeanCurrent</p>
     <br/>
-    <p>Meter(s) for @Model.Customer.Name</p>
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>L1</th>
-            <th>L2</th>
-            <th>L3</th>
-        </tr>
-        @foreach (var item in Model.meterCacheList)
-        {
+    @if(@Model.Customer!=null) {
+        <p>Meter(s) for @Model.Customer.Name</p>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fMeanCurrent[1])
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fMeanCurrent[2])
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fMeanCurrent[3])
-                </td>
+                <th>Name</th>
+                <th>L1</th>
+                <th>L2</th>
+                <th>L3</th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model.meterCacheList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fMeanCurrent[1])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fMeanCurrent[2])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fMeanCurrent[3])
+                    </td>
+                </tr>
+            }
+        </table>
+    } else
+    {
+        <p>Customer not found for logged in user</p>
+    }
 <p><a asp-page="/Meter/Index">Meter</a></p>
 </div>
