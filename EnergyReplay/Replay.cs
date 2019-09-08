@@ -80,7 +80,8 @@ namespace Energy
                 if(msgHandler.HandleRow(line)) {
                     if(msgHandler.NextSection()) {
                         Console.WriteLine("Press key for next topic post");
-                        Console.Read();
+                        //Console.Read();
+                        Thread.Sleep(5000);
                     }
                     string sNewTopic="Test"+msgHandler.Topic;
 
@@ -136,21 +137,26 @@ namespace Energy
 
         public bool HandleRow(string line) {
             bool bHandled=false;
-            if(line.Contains(Qualifier)){
+            if(line.Contains(Qualifier)) {
                 //Set Topic and Value
-                LastClient=Client;
-                LastPostDTM=PostDTM;
                 string[] tmpLine=line.Trim().Split(" ");
-                Topic=tmpLine[2];
-                sTopicParts=Topic.Split("/");
-                Client=sTopicParts[0];
-                Value=tmpLine[tmpLine.Length-1];
-                PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1].Substring(0,8)}", CultureInfo.InvariantCulture);
-                if(LastClient is null) {
+                if(tmpLine[2].Contains("Test")) {
+                    Console.WriteLine($"Filtering out {line}");
+                    bHandled=false;
+                } else {
                     LastClient=Client;
                     LastPostDTM=PostDTM;
+                    Topic=tmpLine[2];
+                    sTopicParts=Topic.Split("/");
+                    Client=sTopicParts[0];
+                    Value=tmpLine[tmpLine.Length-1];
+                    PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1].Substring(0,8)}", CultureInfo.InvariantCulture);
+                    if(LastClient is null) {
+                        LastClient=Client;
+                        LastPostDTM=PostDTM;
+                    }
+                    bHandled=true;
                 }
-                bHandled=true;
             }
             return bHandled;
         }
