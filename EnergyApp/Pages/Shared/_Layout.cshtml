@@ -29,17 +29,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Configuration/Index">Configuration</a>
-                        </li>
+                        @if (User.IsInRole("Admin")) {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Configuration/Index">Configuration</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Meter/Index">Meter</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Outlet/Index">Outlet</a>
+                            <a class="nav-link text-dark" asp-page="/Customer/Index">Customer</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Customer/Index">Customer</a>
+                            <a class="nav-link text-dark" asp-page="/Charger/Index">Charger</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Outlet/Index">Outlet</a>
                         </li>
                     </ul>
                 </div>

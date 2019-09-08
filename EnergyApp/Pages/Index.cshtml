@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "PowerConcern";
 }
+@functions {
+    string FloatFormat(float f) {
+        return f.ToString("0.0#");
+    }   
+}
 
 <div class="text-center">
     <h1 class="display-4">SiteInfo</h1>
@@ -26,15 +31,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.sName)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fMeanCurrent[1])
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fMeanCurrent[2])
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fMeanCurrent[3])
-                    </td>
+                    @{
+                        for (int i = 1; i < 4; i++)
+                        {
+                            <td>
+                                @FloatFormat(item.fMeanCurrent[i])
+                            </td>
+                        }
+                    }
                 </tr>
             }
         </table>

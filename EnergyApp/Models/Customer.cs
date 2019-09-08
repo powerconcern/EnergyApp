@@ -16,8 +16,8 @@ namespace EnergyApp.Data
     public enum CustomerType
     {
         None,
-        Customer,
-        Installer,
-        Administrator
+        Kund,
+        Förening,
+        Företag
     }
 }
