@@ -1,0 +1,990 @@
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/current_l1         27.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 27,3; Mean Current: 25,69832
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/current_l2         9.5
+info: MQTTSvc[0]
+      Phase: 2; Current: 9,5; Mean Current: 10,93754
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/current_l3         14.8
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,8; Mean Current: 14,95799
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/thd_l1     4.2
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/thd_l2     2.7
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/thd_l3     10.3
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/angle_l1_l2        251
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:05:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/current_l1         27.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 27,3; Mean Current: 26,23221
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/current_l2         11.8
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,8; Mean Current: 11,22503
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,93866
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/thd_l1     3.6
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/thd_l2     3.5
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/thd_l3     10.0
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/angle_l1_l2        264
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:05:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 3A
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/current_l1         27.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 27,3; Mean Current: 26,58814
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/current_l2         11.8
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,8; Mean Current: 11,41668
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,92577
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/thd_l1     3.6
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/thd_l2     3.7
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/angle_l1_l2        264
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:05:39: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 2A
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 2A
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/current_l1         14.1
+info: MQTTSvc[0]
+      Phase: 1; Current: 14,1; Mean Current: 22,42543
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/current_l2         10.1
+info: MQTTSvc[0]
+      Phase: 2; Current: 10,1; Mean Current: 10,97779
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,95051
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/thd_l1     4.6
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/thd_l2     3.2
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/angle_l1_l2        286
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:06:55: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/current_l1         14.9
+info: MQTTSvc[0]
+      Phase: 1; Current: 14,9; Mean Current: 19,91695
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/current_l2         11.5
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,5; Mean Current: 11,15186
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,96701
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/thd_l1     4.7
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/thd_l2     3.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/thd_l3     10.5
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/angle_l1_l2        265
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:05: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 9A
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/current_l1         15.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,4; Mean Current: 18,4113
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/current_l2         13.6
+info: MQTTSvc[0]
+      Phase: 2; Current: 13,6; Mean Current: 11,96791
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,94467
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/thd_l1     4.6
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/thd_l2     4.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/angle_l1_l2        277
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:09: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/current_l1         15.1
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,1; Mean Current: 17,30753
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/current_l2         10.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 10; Mean Current: 11,31194
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,96311
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/thd_l1     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/thd_l2     3.5
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/angle_l1_l2        255
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/angle_l1_l3        236
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:07:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/current_l1         15.7
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,7; Mean Current: 16,77169
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/current_l2         9.9
+info: MQTTSvc[0]
+      Phase: 2; Current: 9,9; Mean Current: 10,84129
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,97541
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/thd_l1     5.3
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/thd_l2     2.9
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/thd_l3     10.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/angle_l1_l2        240
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 12A
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/current_l1         15.8
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,8; Mean Current: 16,44779
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/current_l2         11.4
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,4; Mean Current: 11,02753
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,98361
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/thd_l1     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/thd_l2     3.5
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/angle_l1_l2        265
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:07:39: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/current_l1         12.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 12,4; Mean Current: 15,09853
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/current_l2         14.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 14; Mean Current: 12,01835
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,98907
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/thd_l1     3.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/thd_l2     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/angle_l1_l2        283
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/angle_l1_l3        233
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:07:49: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/current_l1         13.9
+info: MQTTSvc[0]
+      Phase: 1; Current: 13,9; Mean Current: 14,69902
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/current_l2         13.2
+info: MQTTSvc[0]
+      Phase: 2; Current: 13,2; Mean Current: 12,41223
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,99271
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/thd_l1     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/thd_l2     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/thd_l3     10.3
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/angle_l1_l2        293
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:07:59: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 14A
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/current_l1         15.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,3; Mean Current: 14,89935
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/current_l2         14.4
+info: MQTTSvc[0]
+      Phase: 2; Current: 14,4; Mean Current: 13,07482
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,96181
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/thd_l1     3.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/thd_l2     4.3
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/thd_l3     10.5
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/angle_l1_l2        295
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:08:09: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/current_l1         25.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 25,3; Mean Current: 18,36623
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/current_l2         13.4
+info: MQTTSvc[0]
+      Phase: 2; Current: 13,4; Mean Current: 13,18322
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/current_l3         14.5
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,5; Mean Current: 14,80787
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/thd_l1     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/thd_l2     4.8
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/thd_l3     9.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/angle_l1_l2        285
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:08:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/current_l1         26.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,3; Mean Current: 21,01082
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/current_l2         12.1
+info: MQTTSvc[0]
+      Phase: 2; Current: 12,1; Mean Current: 12,82214
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/current_l3         14.6
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,6; Mean Current: 14,73858
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/thd_l1     3.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/thd_l2     3.7
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/thd_l3     10.6
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/angle_l1_l2        286
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:08:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 8A
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 22,80721
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/current_l2         11.3
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,3; Mean Current: 12,31476
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/current_l3         14.5
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,5; Mean Current: 14,65905
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/thd_l1     4.3
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/thd_l2     3.5
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/thd_l3     9.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/angle_l1_l2        280
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:39: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 24,00481
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/current_l2         9.6
+info: MQTTSvc[0]
+      Phase: 2; Current: 9,6; Mean Current: 11,40984
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,73937
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/thd_l1     3.9
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/thd_l2     2.8
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/angle_l1_l2        273
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:08:49: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 24,80321
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/current_l2         11.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 11; Mean Current: 11,27323
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,82625
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/thd_l1     4.1
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/thd_l2     3.4
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/angle_l1_l2        282
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:08:59: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 4A
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 25,33547
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/current_l2         10.3
+info: MQTTSvc[0]
+      Phase: 2; Current: 10,3; Mean Current: 10,94882
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/current_l3         15.1
+info: MQTTSvc[0]
+      Phase: 3; Current: 15,1; Mean Current: 14,9175
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/thd_l1     4.2
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/thd_l2     2.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/angle_l1_l2        240
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:09:09: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 25,69031
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/current_l2         10.1
+info: MQTTSvc[0]
+      Phase: 2; Current: 10,1; Mean Current: 10,66588
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/current_l3         15.1
+info: MQTTSvc[0]
+      Phase: 3; Current: 15,1; Mean Current: 14,97833
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/thd_l1     4.1
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/thd_l2     3.0
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/thd_l3     10.3
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/angle_l1_l2        225
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/current_l1         26.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,4; Mean Current: 25,92687
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/current_l2         13.5
+info: MQTTSvc[0]
+      Phase: 2; Current: 13,5; Mean Current: 11,61059
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/current_l3         15.1
+info: MQTTSvc[0]
+      Phase: 3; Current: 15,1; Mean Current: 15,01889
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/thd_l1     4.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/thd_l2     4.6
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/thd_l3     9.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/angle_l1_l2        273
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/angle_l1_l3        233
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 3A
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/current_l1         26.5
+info: MQTTSvc[0]
+      Phase: 1; Current: 26,5; Mean Current: 26,11791
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/current_l2         14.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 14; Mean Current: 12,40706
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 15,01259
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/thd_l1     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/thd_l2     4.6
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/thd_l3     10.0
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/angle_l1_l2        281
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:39: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/current_l1         22.6
+info: MQTTSvc[0]
+      Phase: 1; Current: 22,6; Mean Current: 24,94528
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/current_l2         11.3
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,3; Mean Current: 12,03804
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 15,0084
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/thd_l1     4.2
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/thd_l2     3.3
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/angle_l1_l2        264
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:09:49: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/current_l1         15.9
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,9; Mean Current: 21,93018
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/current_l2         12.7
+info: MQTTSvc[0]
+      Phase: 2; Current: 12,7; Mean Current: 12,25869
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 15,0056
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/thd_l1     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/thd_l2     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/angle_l1_l2        289
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:09:59: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/charging          1
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/current   13
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/energy    1345
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/max_current       13
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/connected         1
+info: MQTTSvc[0]
+      2019-09-06 17:10:00: EVCS/status/temp      21.6
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 7A
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/current_l1         12.7
+info: MQTTSvc[0]
+      Phase: 1; Current: 12,7; Mean Current: 18,85346
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/current_l2         12.4
+info: MQTTSvc[0]
+      Phase: 2; Current: 12,4; Mean Current: 12,30579
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 15,00373
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/thd_l1     3.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/thd_l2     3.8
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/thd_l3     10.5
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/angle_l1_l2        284
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/angle_l1_l3        236
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:10:09: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/current_l1         12.0
+info: MQTTSvc[0]
+      Phase: 1; Current: 12; Mean Current: 16,56897
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/current_l2         13.2
+info: MQTTSvc[0]
+      Phase: 2; Current: 13,2; Mean Current: 12,60386
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,96915
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/thd_l1     3.2
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/thd_l2     4.0
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/thd_l3     10.8
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/angle_l1_l2        288
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/angle_l1_l3        237
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:10:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/current_l1         14.9
+info: MQTTSvc[0]
+      Phase: 1; Current: 14,9; Mean Current: 16,01265
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/current_l2         14.8
+info: MQTTSvc[0]
+      Phase: 2; Current: 14,8; Mean Current: 13,33591
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,97944
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/thd_l1     5.4
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/thd_l2     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/angle_l1_l2        293
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 13A
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/current_l1         15.6
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,6; Mean Current: 15,8751
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/current_l2         12.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 12; Mean Current: 12,8906
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,95296
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/thd_l1     4.3
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/thd_l2     3.7
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/thd_l3     10.4
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/angle_l1_l2        268
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:39: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/current_l1         12.6
+info: MQTTSvc[0]
+      Phase: 1; Current: 12,6; Mean Current: 14,7834
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/current_l2         14.7
+info: MQTTSvc[0]
+      Phase: 2; Current: 14,7; Mean Current: 13,49374
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,96864
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/thd_l1     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/thd_l2     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/thd_l3     10.0
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/angle_l1_l2        287
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:49: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/current_l1         15.4
+info: MQTTSvc[0]
+      Phase: 1; Current: 15,4; Mean Current: 14,98893
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/current_l2         11.3
+info: MQTTSvc[0]
+      Phase: 2; Current: 11,3; Mean Current: 12,76249
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,97909
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/thd_l1     5.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/thd_l2     4.0
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/thd_l3     9.8
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/angle_l1_l2        288
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:10:59: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 14A
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/current_l1         13.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 13,3; Mean Current: 14,42596
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/current_l2         7.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 7; Mean Current: 10,84166
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,98606
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/thd_l1     4.6
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/thd_l2     2.1
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/thd_l3     10.5
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/angle_l1_l2        266
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/angle_l1_l3        236
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:09: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/current_l1         11.1
+info: MQTTSvc[0]
+      Phase: 1; Current: 11,1; Mean Current: 13,3173
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/current_l2         11.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 11; Mean Current: 10,89444
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,99071
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/thd_l1     3.3
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/thd_l2     3.5
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/thd_l3     10.3
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/angle_l1_l2        272
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/angle_l1_l3        236
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:11:19: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/current_l1         14.5
+info: MQTTSvc[0]
+      Phase: 1; Current: 14,5; Mean Current: 13,71154
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/current_l2         14.6
+info: MQTTSvc[0]
+      Phase: 2; Current: 14,6; Mean Current: 12,12963
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,96047
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/thd_l1     5.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/thd_l2     5.1
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/angle_l1_l2        287
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:29: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 14A
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/current_l1         14.3
+info: MQTTSvc[0]
+      Phase: 1; Current: 14,3; Mean Current: 13,90769
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/current_l2         15.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 15; Mean Current: 13,08642
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,97365
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/thd_l1     5.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/thd_l2     5.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/angle_l1_l2        292
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/angle_l1_l3        233
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:11:39: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/current_l1         12.5
+info: MQTTSvc[0]
+      Phase: 1; Current: 12,5; Mean Current: 13,43846
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/current_l2         15.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 15; Mean Current: 13,72428
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/current_l3         14.9
+info: MQTTSvc[0]
+      Phase: 3; Current: 14,9; Mean Current: 14,9491
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/thd_l1     4.5
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/thd_l2     5.4
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/thd_l3     10.1
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/angle_l1_l2        295
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/angle_l1_l3        234
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/frequency          50.0
+info: MQTTSvc[0]
+      2019-09-06 17:11:49: CMS/status/temp       ---
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/current_l1         20.7
+info: MQTTSvc[0]
+      Phase: 1; Current: 20,7; Mean Current: 15,85897
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/current_l2         14.9
+info: MQTTSvc[0]
+      Phase: 2; Current: 14,9; Mean Current: 14,11619
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,96607
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/thd_l1     3.6
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/thd_l2     4.4
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/angle_l1_l2        298
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/angle_l1_l3        236
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:11:59: CMS/status/temp       ---
+Background svc looping
+info: MQTTSvc[0]
+      Could turn EVCS to 13A
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/current_l1         25.9
+info: MQTTSvc[0]
+      Phase: 1; Current: 25,9; Mean Current: 19,20598
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/current_l2         15.0
+info: MQTTSvc[0]
+      Phase: 2; Current: 15; Mean Current: 14,41079
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/current_l3         15.0
+info: MQTTSvc[0]
+      Phase: 3; Current: 15; Mean Current: 14,97738
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/thd_l1     4.1
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/thd_l2     4.9
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/thd_l3     10.2
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/angle_l1_l2        297
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/angle_l1_l3        235
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/frequency          49.9
+info: MQTTSvc[0]
+      2019-09-06 17:12:09: CMS/status/temp       ---

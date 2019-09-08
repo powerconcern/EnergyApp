@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,8 @@ namespace powerconcern.mqtt.services
         public IMqttClient MqttClnt {get; }
         
         public IMqttClientOptions options;
+        
+        public CultureInfo culture;
 
 
         //automatically passes the logger factory in to the constructor via dependency injection
@@ -37,6 +40,8 @@ namespace powerconcern.mqtt.services
         {
             //Get serviceprovider so we later can connect to databasemodel from it.
             _serviceProvider=serviceProvider;
+            
+            culture=CultureInfo.CreateSpecificCulture("sv-SE");
 
             //fMeanCurrent=new float[4];
             bcLookup=new Dictionary<string, BaseCache>();     
@@ -238,8 +243,17 @@ namespace powerconcern.mqtt.services
             }
         }
         private float ToFloat(byte[] bArray) {
+            float f=0;
             string s=System.Text.Encoding.UTF8.GetString(bArray);
-            float f=float.Parse(s.Replace('.',','));
+            //Adjust to sv-SE Culture? Or Invariant
+            try
+            {
+                f=float.Parse(s,System.Globalization.NumberStyles.Float,CultureInfo.InvariantCulture);
+            }
+            catch (System.Exception)
+            {
+                Logger.LogError($"Unable to parse {s}");
+            }
             return f;
         }
         private void OnTraceMessagePublished(object sender, MqttNetLogMessagePublishedEventArgs e)

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "EnergyReplay"
+		},
+		{
+			"path": "EnergyApp"
+		},
+		{
+			"path": "EnergyApp.Test"
+		}
+	],
+	"settings": {}
+}
