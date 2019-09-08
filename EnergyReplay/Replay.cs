@@ -80,8 +80,8 @@ namespace Energy
                 if(msgHandler.HandleRow(line)) {
                     if(msgHandler.NextSection()) {
                         Console.WriteLine("Press key for next topic post");
-                        //Console.Read();
-                        Thread.Sleep(5000);
+                        Console.Read();
+                        //Thread.Sleep(5000);
                     }
                     string sNewTopic="Test"+msgHandler.Topic;
 

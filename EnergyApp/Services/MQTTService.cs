@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using EnergyApp.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -83,6 +82,7 @@ namespace powerconcern.mqtt.services
                             meterCache.fMaxCurrent=meitem.MaxCurrent;
                             bcLookup.Add(meitem.Name, meterCache);
 
+                            //TODO Select where charger in meter
                             var chargers=dbContext.Chargers;
                             foreach (var chitem in chargers)
                             {
@@ -117,7 +117,7 @@ namespace powerconcern.mqtt.services
             #region UseConnectedHandler
             MqttClnt.UseConnectedHandler(async e =>
             {
-                Console.WriteLine("### CONNECTED WITH SERVER ###");
+                Console.WriteLine("### CONNECTED TO SERVER ###");
                 // Subscribe to topics
                 foreach(string Name in bcLookup.Keys) {
                     await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"{Name}/#").Build());
@@ -145,7 +145,11 @@ namespace powerconcern.mqtt.services
 
             MqttClnt.UseApplicationMessageReceivedHandler(e =>
             {
-                string logstr=$"{DateTime.Now}: {e.ApplicationMessage.Topic} \t {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                Stopwatch sw = new Stopwatch();
+
+                sw.Start();
+
+                string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
                 Logger.LogInformation(logstr);
 
                 //TODO Find charger from chargername or meter from metername
@@ -165,12 +169,12 @@ namespace powerconcern.mqtt.services
 
                 //Check current from the highest meter to the charger
                 if(mc is MeterCache) {
+                    Logger.LogInformation($"Found mCache:{sw.ElapsedMilliseconds} ms");
                     MeterCache mCache=(MeterCache)mc;
                     if(e.ApplicationMessage.Topic.Contains("current_l")) {
                         //Get info in temp vars
                         var fCurrent=ToFloat(e.ApplicationMessage.Payload);
                         int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
-                        
                         
                         //Store in cache
                         mCache.fMeterCurrent[iPhase]=fCurrent;
@@ -178,7 +182,8 @@ namespace powerconcern.mqtt.services
                         Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}");
                         float fNewChargeCurrent;
                         //Calculate new value
-                        if(fCurrent>mCache.fMeterCurrent[iPhase]) {
+                        if(fCurrent>mCache.fMaxCurrent) {
+                            Logger.LogInformation($"Overload meter:{sw.ElapsedMilliseconds} ms");
                             //What's the overcurrent?
                             float fOverCurrent=fCurrent-mCache.fMaxCurrent;
                             Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much!");
@@ -208,6 +213,12 @@ namespace powerconcern.mqtt.services
                                                 false);
                                 }
                             }
+                            Logger.LogInformation($"Adjusted current:{sw.ElapsedMilliseconds} ms");
+                        } 
+                        else
+                        {
+                            //Loop through chargers and outlets
+
                         }
                     }
 
@@ -216,6 +227,7 @@ namespace powerconcern.mqtt.services
                     var cCache=(ChargerCache)mc;
                     if(e.ApplicationMessage.Topic.Contains("/status/current")) {
                         cCache.fCurrentSet=ToFloat(e.ApplicationMessage.Payload);
+                        Logger.LogInformation($"Got charger current:{sw.ElapsedMilliseconds} ms");
                     }
                 }
 
@@ -228,7 +240,8 @@ namespace powerconcern.mqtt.services
                     //bw.Flush();
                     bw.Close();
                 }
-
+                Logger.LogInformation($"Receive end:{sw.ElapsedMilliseconds} ms");
+                sw.Stop();
             });
 
             Logger.LogInformation("MQTTService created");
@@ -407,9 +420,17 @@ namespace powerconcern.mqtt.services
         public int iPhases=0;
         public string GetNewChargeCurrent()
         {
+            //Get max current that meter could handle
             float fCurrentMaxAdd=((MeterCache)bcParent).GetMaxPhaseAddCurrent(iPhases);
+
+            //Can the charger handle that too?
+            //TODO Get this from Outlet instead
+
             //Current to increase with
             float fNewChargeCurrent=fCurrentSet+fCurrentMaxAdd;
+            if(fNewChargeCurrent>fMaxCurrent) {
+                fNewChargeCurrent=fMaxCurrent;
+            }
 
             //Max current to increase with
             return fNewChargeCurrent.ToString("0");
