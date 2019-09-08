@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Globalization;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
+using MQTTnet.Protocol;
 
 namespace Energy
 {
@@ -13,9 +15,8 @@ namespace Energy
     {
         static void Main(string[] args)
         {
-            //public MqttFactory Factory;
-            //public IMqttClient MqttClnt {get; }
-            //public IMqttClientOptions options;
+            bool IsConnected=false;
+
             //Find replay file
             string sFile="Replay.txt";
             string sBrokerURL="mqtt.symlink.se";
@@ -38,6 +39,7 @@ namespace Energy
             MqttClnt.UseConnectedHandler(e =>
             {
                 Console.WriteLine("### CONNECTED WITH SERVER ###");
+                IsConnected=true;
                 // Subscribe to topics
 //                foreach(string Name in bcLookup.Keys) {
   //                  await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"{Name}/#").Build());
@@ -52,10 +54,12 @@ namespace Energy
             MqttClnt.UseDisconnectedHandler(async e =>
             {
                 Console.WriteLine("### DISCONNECTED FROM SERVER ###");
+                IsConnected=false;
                 await Task.Delay(TimeSpan.FromSeconds(5));
                 try
                 {
                     await MqttClnt.ConnectAsync(options);
+                    IsConnected=true;
                 }
                 catch
                 {
@@ -63,8 +67,10 @@ namespace Energy
                 }
             });
 
-            var result = MqttClnt.ConnectAsync(options);
 
+            var result = MqttClnt.ConnectAsync(options);
+            
+            
             Console.WriteLine($"Replaying from {sFile}");
 
             MessageHandler msgHandler=new MessageHandler("2019-");
@@ -76,8 +82,21 @@ namespace Energy
                         Console.WriteLine("Press key for next topic post");
                         Console.Read();
                     }
-                }
+                    string sNewTopic="Test"+msgHandler.Topic;
 
+                    //Check if connected
+                    while (!IsConnected)
+                    {
+                        Console.WriteLine("Waiting for connection");
+                        //Task.Delay(TimeSpan.FromSeconds(5));
+                        Thread.Sleep(5000);
+                    }
+                    MqttClnt.PublishAsync(sNewTopic,
+                    msgHandler.Value,
+                    MqttQualityOfServiceLevel.AtLeastOnce,
+                    false);
+                    Console.WriteLine($"Sent {msgHandler.Value} to {sNewTopic}");
+                }
             }
         }
     }
@@ -87,10 +106,28 @@ namespace Energy
     public class MessageHandler {
         private DateTime LastPostDTM {get;set;}
         private DateTime PostDTM {get;set;}
+        private string[] sTopicParts;
         private string LastClient {get;set;}
         private string Client {get;set;}
-        private string Topic {get;set;}
-        private string Value {get;set;}
+        public string Topic {get;set;}
+/*         
+            Not needed as long as we only prefix Test
+
+            public string NewTopic {
+            get {
+                StringBuilder stringBuilder=new StringBuilder(sPrefix);
+
+                for (int i = 0; i < sTopicParts.Length; i++)
+                {
+                    stringBuilder.Append(sTopicParts[i]);
+                }
+                return stringBuilder.ToString();
+            }
+            set {
+            }
+        }
+ */
+        public string Value {get;set;}
         private string Qualifier {get;set;}
 
         public MessageHandler(string qualf) {
@@ -104,8 +141,9 @@ namespace Energy
                 LastClient=Client;
                 LastPostDTM=PostDTM;
                 string[] tmpLine=line.Trim().Split(" ");
-                string[] tmpTopic=tmpLine[2].Split("/");
-                Client=tmpTopic[0];
+                Topic=tmpLine[2];
+                sTopicParts=Topic.Split("/");
+                Client=sTopicParts[0];
                 Value=tmpLine[tmpLine.Length-1];
                 PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1].Substring(0,8)}", CultureInfo.InvariantCulture);
                 if(LastClient is null) {
@@ -113,7 +151,6 @@ namespace Energy
                     LastPostDTM=PostDTM;
                 }
                 bHandled=true;
-                Console.WriteLine(line);
             }
             return bHandled;
         }
@@ -127,7 +164,7 @@ namespace Energy
             }
             
             //Calculate time since last topic post 
-            if(bNextSection || SecondsSinceLastPost()>5) {
+            if(bNextSection || SecondsSinceLastPost()>3) {
                 return true;
             } else {
                 return false;

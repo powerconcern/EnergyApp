@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj": {}
+    "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj": {}
   },
   "projects": {
-    "c:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj": {
+    "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
+        "projectUniqueName": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
         "projectName": "EnergyReplay",
-        "projectPath": "c:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
+        "projectPath": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
         "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
-        "outputPath": "c:\\Dev\\lab\\EnergyApp\\EnergyReplay\\obj\\",
+        "outputPath": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
