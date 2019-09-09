@@ -9,3 +9,14 @@ c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyI
 c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyInfo.cs
 c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.dll
 c:\Dev\lab\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.pdb
+C:\Dev\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.deps.json
+C:\Dev\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.runtimeconfig.json
+C:\Dev\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.runtimeconfig.dev.json
+c:\Dev\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.dll
+c:\Dev\EnergyApp\EnergyReplay\bin\Debug\netcoreapp2.2\EnergyReplay.pdb
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.csprojAssemblyReference.cache
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.csproj.CoreCompileInputs.cache
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyInfoInputs.cache
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.AssemblyInfo.cs
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.dll
+c:\Dev\EnergyApp\EnergyReplay\obj\Debug\netcoreapp2.2\EnergyReplay.pdb

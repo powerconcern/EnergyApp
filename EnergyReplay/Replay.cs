@@ -38,7 +38,7 @@ namespace Energy
             #region UseConnectedHandler
             MqttClnt.UseConnectedHandler(e =>
             {
-                Console.WriteLine("### CONNECTED WITH SERVER ###");
+                Console.WriteLine("### CONNECTED TO SERVER ###");
                 IsConnected=true;
                 // Subscribe to topics
 //                foreach(string Name in bcLookup.Keys) {

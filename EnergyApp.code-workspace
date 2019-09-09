@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "EnergyApp.Test"
+		},
+		{
+			"path": "RelationTest"
 		}
 	],
 	"settings": {}
