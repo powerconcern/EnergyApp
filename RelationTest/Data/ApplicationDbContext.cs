@@ -14,10 +14,7 @@ namespace EnergyApp.Data
         {
         }
 
-        public DbSet<Meter> Meters { get; set; }
-        public DbSet<Charger> Chargers { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<CMCAssign> CMCAssigns { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
