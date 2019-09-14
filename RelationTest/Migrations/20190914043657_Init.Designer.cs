@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RelationTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190913041618_init")]
-    partial class init
+    [Migration("20190914043657_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,18 +20,15 @@ namespace RelationTest.Migrations
 
             modelBuilder.Entity("EnergyApp.Data.CMCAssign", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("ChargerID");
 
                     b.Property<int>("CustomerID");
 
                     b.Property<int>("MeterID");
 
-                    b.HasKey("ID");
+                    b.Property<DateTime>("AddedDate");
 
-                    b.HasIndex("ChargerID");
+                    b.HasKey("ChargerID", "CustomerID", "MeterID");
 
                     b.HasIndex("CustomerID");
 

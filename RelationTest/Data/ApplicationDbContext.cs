@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -23,5 +23,11 @@ namespace EnergyApp.Data
                 
             base.OnModelCreating(builder);
         }        
+
+        public DbSet<EnergyApp.Data.Meter> Meter { get; set; }
+
+        public DbSet<EnergyApp.Data.Charger> Charger { get; set; }
+
+        public DbSet<EnergyApp.Data.CMCAssign> CMCAssign { get; set; }
     }
 }

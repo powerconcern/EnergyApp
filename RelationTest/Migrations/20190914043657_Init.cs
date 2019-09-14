@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RelationTest.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,15 +200,14 @@ namespace RelationTest.Migrations
                 name: "CMCAssign",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     MeterID = table.Column<int>(nullable: false),
                     ChargerID = table.Column<int>(nullable: false),
-                    CustomerID = table.Column<int>(nullable: false)
+                    CustomerID = table.Column<int>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CMCAssign", x => x.ID);
+                    table.PrimaryKey("PK_CMCAssign", x => new { x.ChargerID, x.CustomerID, x.MeterID });
                     table.ForeignKey(
                         name: "FK_CMCAssign_Charger_ChargerID",
                         column: x => x.ChargerID,
@@ -265,11 +264,6 @@ namespace RelationTest.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CMCAssign_ChargerID",
-                table: "CMCAssign",
-                column: "ChargerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CMCAssign_CustomerID",

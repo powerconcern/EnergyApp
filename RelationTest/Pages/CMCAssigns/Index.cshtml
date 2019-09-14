@@ -1,0 +1,54 @@
+@page
+@model RelationTest.Pages_CMCAssigns.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CMCAssign[0].AddedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMCAssign[0].Meter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMCAssign[0].Charger)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMCAssign[0].Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CMCAssign) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meter.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charger.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.ID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

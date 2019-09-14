@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {}
+    "C:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {}
   },
   "projects": {
-    "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {
+    "C:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
+        "projectUniqueName": "C:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
         "projectName": "RelationTest",
-        "projectPath": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
+        "projectPath": "C:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
         "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
-        "outputPath": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\obj\\",
+        "outputPath": "C:\\Dev\\lab\\EnergyApp\\RelationTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

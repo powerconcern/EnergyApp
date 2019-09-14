@@ -18,18 +18,15 @@ namespace RelationTest.Migrations
 
             modelBuilder.Entity("EnergyApp.Data.CMCAssign", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("ChargerID");
 
                     b.Property<int>("CustomerID");
 
                     b.Property<int>("MeterID");
 
-                    b.HasKey("ID");
+                    b.Property<DateTime>("AddedDate");
 
-                    b.HasIndex("ChargerID");
+                    b.HasKey("ChargerID", "CustomerID", "MeterID");
 
                     b.HasIndex("CustomerID");
 
