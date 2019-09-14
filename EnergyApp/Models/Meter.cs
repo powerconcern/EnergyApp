@@ -11,6 +11,6 @@ namespace EnergyApp.Data
         public string Name { get; set; }
         public float MaxCurrent { get; set; }
         public Type? Type { get; set; }
-        public int ChargerID { get; set; }
+        public ICollection<CMCAssign> CMCAssigns { get; set; }
     }
 }

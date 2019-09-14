@@ -7,10 +7,7 @@ namespace EnergyApp.Data
         public int ID { get; set; }
         public string Name { get; set; }
         public string CustomerNumber { get; set; }
-        public int MeterID { get; set; }
-        public int ChargerID { get; set; }
-        public virtual ICollection<Charger> Chargers { get; set; }
-        public virtual ICollection<Meter> Meters { get; set; }
+        public ICollection<CMCAssign> CMCAssigns { get; set; }
         public CustomerType? Type { get; set; }
     }
     public enum CustomerType
