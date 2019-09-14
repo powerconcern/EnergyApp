@@ -28,6 +28,7 @@ c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.Views.pdb
 c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.dll
 c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.pdb
 C:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csproj.CopyComplete
+<<<<<<< HEAD
 c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Customers\Create.g.cshtml.cs
 c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Customers\Delete.g.cshtml.cs
 c:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Customers\Details.g.cshtml.cs
@@ -48,3 +49,35 @@ C:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\CMCAssigns
 C:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\CMCAssigns\Details.g.cshtml.cs
 C:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\CMCAssigns\Edit.g.cshtml.cs
 C:\Dev\lab\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\CMCAssigns\Index.g.cshtml.cs
+=======
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.deps.json
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.runtimeconfig.json
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.runtimeconfig.dev.json
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.dll
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.pdb
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.Views.dll
+D:\Dev\EnergyApp\RelationTest\bin\Debug\netcoreapp2.2\RelationTest.Views.pdb
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csprojAssemblyReference.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csproj.CoreCompileInputs.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorAssemblyInfo.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorAssemblyInfo.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.AssemblyInfoInputs.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.AssemblyInfo.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.TagHelpers.input.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.TagHelpers.output.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorCoreGenerate.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Error.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Index.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Privacy.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_CookieConsentPartial.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_Layout.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_ValidationScriptsPartial.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\_ViewImports.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\Razor\Pages\_ViewStart.g.cshtml.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorTargetAssemblyInfo.cache
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorTargetAssemblyInfo.cs
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.Views.pdb
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.dll
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.pdb
+D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csproj.CopyComplete
+>>>>>>> 5cca9463871a12adbdfa6faace1e3dc55545cd25

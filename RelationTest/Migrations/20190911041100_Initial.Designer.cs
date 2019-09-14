@@ -3,14 +3,16 @@ using System;
 using EnergyApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RelationTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190911041100_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,27 +20,18 @@ namespace RelationTest.Migrations
 
             modelBuilder.Entity("EnergyApp.Data.CMCAssign", b =>
                 {
-<<<<<<< HEAD
-=======
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
->>>>>>> 5cca9463871a12adbdfa6faace1e3dc55545cd25
                     b.Property<int>("ChargerID");
 
                     b.Property<int>("CustomerID");
 
                     b.Property<int>("MeterID");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("AddedDate");
-
-                    b.HasKey("ChargerID", "CustomerID", "MeterID");
-=======
                     b.HasKey("ID");
 
                     b.HasIndex("ChargerID");
->>>>>>> 5cca9463871a12adbdfa6faace1e3dc55545cd25
 
                     b.HasIndex("CustomerID");
 
