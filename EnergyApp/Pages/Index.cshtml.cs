@@ -48,7 +48,8 @@ namespace EnergyApp.Pages
 
             Customer=_context.Customers.FirstOrDefault(c => c.CustomerNumber == userId);
 
-            Customer = _context.Customers
+            //TODO
+/*             Customer = _context.Customers
                     .Include(cust => cust.Meters)
 //                        .ThenInclude(e => e.Course)
                     .AsNoTracking()
@@ -60,6 +61,7 @@ namespace EnergyApp.Pages
                     meterCacheList.Add(meterCache);
                 }
             }
+*/
 /*            var chargers=   from charger in _context.Chargers
                             join meter in _context.Meters on charger.ID equals meter.ChargerID
                             join outlet in _context.Outlets on charger.OutletID equals outlet.ID

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace EnergyApp.Data
 {
     public enum Type

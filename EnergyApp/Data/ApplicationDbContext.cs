@@ -19,8 +19,12 @@ namespace EnergyApp.Data
         public DbSet<Charger> Chargers { get; set; }
         public DbSet<Outlet> Outlets { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<CMCAssign> CMCAssigns { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<CMCAssign>()
+                .HasKey(k => new {k.ChargerID, k.CustomerID,k.MeterID});
+
             builder.Entity<Configuration>(entity =>
             {
                 entity.Property(e => e.Key)
