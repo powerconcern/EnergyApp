@@ -18,6 +18,9 @@ namespace EnergyApp.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<CMCAssign>()
+                .HasKey(k => new {k.ChargerID, k.CustomerID,k.MeterID});
+                
             base.OnModelCreating(builder);
         }        
     }

@@ -9,6 +9,7 @@ namespace EnergyApp.Data
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public int ChargerID { get; set; }
         public float MaxCurrent { get; set; }
         public OutletType? Type { get; set; }
         public Charger Charger { get; set; }
