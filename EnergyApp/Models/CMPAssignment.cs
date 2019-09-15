@@ -10,5 +10,6 @@ namespace EnergyApp.Data
         public Meter Meter { get; set; }
         public Charger Charger { get; set; }
         public Partner Partner { get; set; }
+        public ICollection<Adjustment> Adjustments { get; set; }
     }
 }

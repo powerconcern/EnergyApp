@@ -13,5 +13,14 @@
 			"path": "RelationTest"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.useNodeRuntime": true,
+		"sqltools.connections": [
+			{
+				"database": ".\\app.db",
+				"dialect": "SQLite",
+				"name": "App"
+			}
+		]
+	}
 }

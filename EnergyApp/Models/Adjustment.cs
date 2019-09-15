@@ -8,7 +8,6 @@ namespace EnergyApp.Data
         public int ID { get; set; }
         public DateTime TimeStamp { get; set; }
         public int Current { get; set; }
-        public int OutletID { get; set; }
-        public ICollection<CMPAssignment> CMPAssignments { get; set; }
+        public int iPhase { get; set; }
     }
 }
