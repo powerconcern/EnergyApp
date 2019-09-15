@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -70,7 +71,7 @@ namespace powerconcern.mqtt.services
                 try {
                     BaseCache meterCache;
                     var customers=dbContext.Partners
-                        .Where(n => n.Type==PartnerType.Kund);
+                        .Where(n => n.Type==PartnerType.Kund).AsEnumerable().;
                     foreach (var cuitem in customers)
                     {
                         var meters=dbContext.Meters;
@@ -277,6 +278,7 @@ namespace powerconcern.mqtt.services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            
             Logger.LogInformation("Background thread started");
 
             var result = await MqttClnt.ConnectAsync(options);
