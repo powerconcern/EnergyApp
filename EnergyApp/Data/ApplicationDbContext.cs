@@ -14,16 +14,16 @@ namespace EnergyApp.Data
         {
         }
 
-        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Configuration> Configuration { get; set; }
         public DbSet<Meter> Meters { get; set; }
         public DbSet<Charger> Chargers { get; set; }
         public DbSet<Outlet> Outlets { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<CMCAssign> CMCAssigns { get; set; }
+        public DbSet<Partner> Partners { get; set; }
+        public DbSet<CMPAssignment> CMPAssignments { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<CMCAssign>()
-                .HasKey(k => new {k.ChargerID, k.CustomerID,k.MeterID});
+            builder.Entity<CMPAssignment>()
+                .HasKey(k => new {k.ChargerID, k.PartnerID,k.MeterID});
 
             builder.Entity<Configuration>(entity =>
             {

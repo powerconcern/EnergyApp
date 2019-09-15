@@ -8,5 +8,7 @@ namespace EnergyApp.Data
         public string Name { get; set; }
         public float MaxCurrent { get; set; }
         public ICollection<Outlet> Outlets { get; set; }
+        public ICollection<ChargeSession> ChargeSessions { get; set; }
+        public ICollection<CMPAssignment> CMPAssignments { get; set; }
     }
 }

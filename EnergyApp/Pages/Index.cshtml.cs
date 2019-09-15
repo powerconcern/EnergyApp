@@ -28,7 +28,7 @@ namespace EnergyApp.Pages
         public Charger Charger { get; set; }
 
         [BindProperty]
-        public Customer Customer { get; set; }
+        public Partner Partner { get; set; }
 
         [BindProperty]
         public string userId {get;set;}
@@ -46,7 +46,7 @@ namespace EnergyApp.Pages
             //Get user id
             userId =  User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            Customer=_context.Customers.FirstOrDefault(c => c.CustomerNumber == userId);
+            Partner=_context.Partners.FirstOrDefault(c => c.UserReference == userId);
 
             //TODO
 /*             Customer = _context.Customers

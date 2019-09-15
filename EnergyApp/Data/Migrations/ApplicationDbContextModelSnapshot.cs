@@ -14,105 +14,7 @@ namespace EnergyApp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
-
-            modelBuilder.Entity("EnergyApp.Data.CMCAssign", b =>
-                {
-                    b.Property<int>("ChargerID");
-
-                    b.Property<int>("CustomerID");
-
-                    b.Property<int>("MeterID");
-
-                    b.HasKey("ChargerID", "CustomerID", "MeterID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.HasIndex("MeterID");
-
-                    b.ToTable("CMCAssigns");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Charger", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("MaxCurrent");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Chargers");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Configuration", b =>
-                {
-                    b.Property<int>("ID");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Configurations");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Customer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CustomerNumber");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("Type");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Meter", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("MaxCurrent");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("Type");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Meters");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Outlet", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ChargerID");
-
-                    b.Property<float>("MaxCurrent");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("Type");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ChargerID");
-
-                    b.ToTable("Outlets");
-                });
+                .HasAnnotation("ProductVersion", "2.2.0-preview1");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -273,32 +175,6 @@ namespace EnergyApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.CMCAssign", b =>
-                {
-                    b.HasOne("EnergyApp.Data.Charger", "Charger")
-                        .WithMany()
-                        .HasForeignKey("ChargerID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EnergyApp.Data.Customer", "Customer")
-                        .WithMany("CMCAssigns")
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EnergyApp.Data.Meter", "Meter")
-                        .WithMany("CMCAssigns")
-                        .HasForeignKey("MeterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("EnergyApp.Data.Outlet", b =>
-                {
-                    b.HasOne("EnergyApp.Data.Charger", "Charger")
-                        .WithMany("Outlets")
-                        .HasForeignKey("ChargerID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

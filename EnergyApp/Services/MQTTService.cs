@@ -61,7 +61,7 @@ namespace powerconcern.mqtt.services
                 dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
                 //Read all of the config
-                appConfig=dbContext.Configurations.ToList();
+                appConfig=dbContext.Configuration.ToList();
                 
                 sBrokerURL=GetConfigString("BrokerURL");
                 sBrokerUser=GetConfigString("BrokerUser");
@@ -69,7 +69,8 @@ namespace powerconcern.mqtt.services
 
                 try {
                     BaseCache meterCache;
-                    var customers=dbContext.Customers;
+                    var customers=dbContext.Partners
+                        .Where(n => n.Type==PartnerType.Kund);
                     foreach (var cuitem in customers)
                     {
                         var meters=dbContext.Meters;
@@ -78,7 +79,7 @@ namespace powerconcern.mqtt.services
                             meterCache=new MeterCache();
 
                             meterCache.sName=meitem.Name;
-                            meterCache.sCustomerID=cuitem.CustomerNumber;
+                            meterCache.sCustomerID=cuitem.UserReference;
                             meterCache.fMaxCurrent=meitem.MaxCurrent;
                             bcLookup.Add(meitem.Name, meterCache);
 
@@ -88,7 +89,7 @@ namespace powerconcern.mqtt.services
                             {
                                 ChargerCache chargerCache=new ChargerCache();
 
-                                chargerCache.sCustomerID=cuitem.CustomerNumber;
+                                chargerCache.sCustomerID=cuitem.UserReference;
                                 chargerCache.fMaxCurrent=chitem.MaxCurrent;
                                 chargerCache.bcParent=meterCache;
                                 chargerCache.sName=chitem.Name;

@@ -2,15 +2,15 @@ using System.Collections.Generic;
 
 namespace EnergyApp.Data
 {
-    public class Customer
+    public class Partner
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string CustomerNumber { get; set; }
-        public ICollection<CMCAssign> CMCAssigns { get; set; }
-        public CustomerType? Type { get; set; }
+        public string UserReference { get; set; }
+        public ICollection<CMPAssignment> CMPAssignments { get; set; }
+        public PartnerType? Type { get; set; }
     }
-    public enum CustomerType
+    public enum PartnerType
     {
         None,
         Kund,
