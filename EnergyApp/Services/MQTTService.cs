@@ -125,7 +125,13 @@ namespace powerconcern.mqtt.services
                 Console.WriteLine("### CONNECTED TO SERVER ###");
                 // Subscribe to topics
                 foreach(string Name in bcLookup.Keys) {
-                    await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"{Name}/#").Build());
+                    if(Name.Contains("EVC")) {
+                        await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"{Name}/#").Build());
+                    }
+                }
+                for (int i = 1; i < 4; i++)
+                {
+                    await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"+/current_l{i}/#").Build());
                 }
 
                 Console.WriteLine("### SUBSCRIBED to ###");
@@ -227,7 +233,7 @@ namespace powerconcern.mqtt.services
                         cCache.fCurrentSet=ToFloat(e.ApplicationMessage.Payload);
                         Logger.LogInformation($"Got charger current:{sw.ElapsedMilliseconds} ms");
                     }
-                    
+                    //TODO EVCS/status/current
                 }
 
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {
