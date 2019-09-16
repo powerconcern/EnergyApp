@@ -4,17 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergyApp.Data;
 
-namespace EnergyApp.Pages_Partner
+namespace EnergyApp.Pages_Partners
 {
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly EnergyApp.Data.ApplicationDbContext _context;
 
-        public EditModel(EnergyApp.Data.ApplicationDbContext context)
+        public DeleteModel(EnergyApp.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -38,37 +37,22 @@ namespace EnergyApp.Pages_Partner
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Partner).State = EntityState.Modified;
+            Partner = await _context.Partners.FindAsync(id);
 
-            try
+            if (Partner != null)
             {
+                _context.Partners.Remove(Partner);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PartnerExists(Partner.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool PartnerExists(int id)
-        {
-            return _context.Partners.Any(e => e.ID == id);
         }
     }
 }

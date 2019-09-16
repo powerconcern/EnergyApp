@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EnergyApp.Data;
 
-namespace EnergyApp.Pages_Partner
+namespace EnergyApp.Pages_Partners
 {
     public class IndexModel : PageModel
     {

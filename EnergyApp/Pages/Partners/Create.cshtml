@@ -1,11 +1,11 @@
 @page
-@model EnergyApp.Pages_Partner.EditModel
+@model EnergyApp.Pages_Partners.CreateModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
 <h4>Partner</h4>
 <hr />
@@ -13,7 +13,6 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Partner.ID" />
             <div class="form-group">
                 <label asp-for="Partner.Name" class="control-label"></label>
                 <input asp-for="Partner.Name" class="form-control" />
@@ -30,14 +29,14 @@
                 <span asp-validation-for="Partner.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

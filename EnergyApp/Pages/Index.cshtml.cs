@@ -60,6 +60,9 @@ namespace EnergyApp.Pages
             {
                 if(PartnerID==0||PartnerID==assign.PartnerID) {
                     //TODO show meters
+                    ((MQTTService)_mqttsvc).GetBaseCache(assign.Meter.Name);
+                    
+                
                 }
                 PartnerID=assign.PartnerID;
             }

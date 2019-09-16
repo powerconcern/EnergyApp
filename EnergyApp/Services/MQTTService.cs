@@ -199,14 +199,6 @@ namespace powerconcern.mqtt.services
 
                             fNewChargeCurrent=(mCache.fMaxCurrent-fOverCurrent)/iChargers;
 
-                            //Round down
-                            fNewChargeCurrent=(int)fNewChargeCurrent;
-                            if(fNewChargeCurrent<2) {
-                                fNewChargeCurrent=0;
-                            }
-                            
-                            string sNewChargeCurrent=fNewChargeCurrent.ToString();
-
                             foreach(ChargerCache cc in mCache.cChildren) {
                                 await AdjustCurrent(fNewChargeCurrent, cc);
                             }
@@ -235,6 +227,7 @@ namespace powerconcern.mqtt.services
                         cCache.fCurrentSet=ToFloat(e.ApplicationMessage.Payload);
                         Logger.LogInformation($"Got charger current:{sw.ElapsedMilliseconds} ms");
                     }
+                    
                 }
 
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {

@@ -81,3 +81,11 @@ D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.dll
 D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.pdb
 D:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csproj.CopyComplete
 >>>>>>> 5cca9463871a12adbdfa6faace1e3dc55545cd25
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csprojAssemblyReference.cache
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.csproj.CoreCompileInputs.cache
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorAssemblyInfo.cache
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.RazorAssemblyInfo.cs
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.AssemblyInfoInputs.cache
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.AssemblyInfo.cs
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.dll
+C:\Dev\EnergyApp\RelationTest\obj\Debug\netcoreapp2.2\RelationTest.pdb
