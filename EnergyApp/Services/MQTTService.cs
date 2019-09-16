@@ -2,8 +2,8 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Data.Entity;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -69,34 +69,37 @@ namespace powerconcern.mqtt.services
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
 
                 try {
-                    BaseCache meterCache;
-                    var customers=dbContext.Partners
-                        .Where(n => n.Type==PartnerType.Kund).AsEnumerable().;
-                    foreach (var cuitem in customers)
-                    {
-                        var meters=dbContext.Meters;
-                        foreach (var meitem in meters)
+                    var assignments=dbContext.CMPAssignments
+                        .Include(m=>m.Meter)
+                        .Include(p=>p.Partner)
+                        .Include(c=>c.Charger)
+                        .AsNoTracking();
+                            
+                    foreach (var assignItem in assignments)
+                    {   
+                        var meitem=assignItem.Meter;
+                        var paitem=assignItem.Partner;
+                        var chitem=assignItem.Charger;
+                        
+                        try
                         {
-                            meterCache=new MeterCache();
-
+                            MeterCache meterCache=new MeterCache();
                             meterCache.sName=meitem.Name;
-                            meterCache.sCustomerID=cuitem.UserReference;
+                            meterCache.sCustomerID=paitem.UserReference;
                             meterCache.fMaxCurrent=meitem.MaxCurrent;
                             bcLookup.Add(meitem.Name, meterCache);
 
-                            //TODO Select where charger in meter
-                            var chargers=dbContext.Chargers;
-                            foreach (var chitem in chargers)
-                            {
-                                ChargerCache chargerCache=new ChargerCache();
-
-                                chargerCache.sCustomerID=cuitem.UserReference;
-                                chargerCache.fMaxCurrent=chitem.MaxCurrent;
-                                chargerCache.bcParent=meterCache;
-                                chargerCache.sName=chitem.Name;
-                                chargerCache.iPhases=7;
-                                bcLookup.Add(chitem.Name, chargerCache);
-                            }
+                            ChargerCache chargerCache=new ChargerCache();
+                            chargerCache.sCustomerID=paitem.UserReference;
+                            chargerCache.fMaxCurrent=chitem.MaxCurrent;
+                            chargerCache.bcParent=meterCache;
+                            chargerCache.sName=chitem.Name;
+                            chargerCache.iPhases=7;
+                            bcLookup.Add(chitem.Name, chargerCache);
+                        }
+                        catch (System.Exception e)
+                        {
+                            Logger.LogError(e.Message);
                         }
                     }
                 } catch(Exception e) {
@@ -124,8 +127,6 @@ namespace powerconcern.mqtt.services
                 foreach(string Name in bcLookup.Keys) {
                     await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"{Name}/#").Build());
                 }
-                //await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("+/status/#").Build());
-                //await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic("+/set/#").Build());
 
                 Console.WriteLine("### SUBSCRIBED to ###");
             });
@@ -145,7 +146,7 @@ namespace powerconcern.mqtt.services
                 }
             });
 
-            MqttClnt.UseApplicationMessageReceivedHandler(e =>
+            MqttClnt.UseApplicationMessageReceivedHandler(async e =>
             {
                 Stopwatch sw = new Stopwatch();
 
@@ -154,7 +155,7 @@ namespace powerconcern.mqtt.services
                 string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
                 Logger.LogInformation(logstr);
 
-                //TODO Find charger from chargername or meter from metername
+                //Find charger from chargername or meter from metername
                 string[] topic=e.ApplicationMessage.Topic.Split('/');
 
                 BaseCache mc;
@@ -192,7 +193,7 @@ namespace powerconcern.mqtt.services
                             
                             var chargers=mCache.cChildren.Select(m => m.GetType().Equals("Charger"));
 
-                            //TODO Set new current
+                            //Set new current
                             //Number of chargers to even out on
                             int iChargers=mCache.cChildren.Count;
 
@@ -207,23 +208,26 @@ namespace powerconcern.mqtt.services
                             string sNewChargeCurrent=fNewChargeCurrent.ToString();
 
                             foreach(ChargerCache cc in mCache.cChildren) {
-                                if(cc.fCurrentSet!=fNewChargeCurrent) {
-                                    Logger.LogInformation($"Adjusting down to {sNewChargeCurrent}");
-                                    MqttClnt.PublishAsync($"{cc.sName}/set/current",
-                                                sNewChargeCurrent,
-                                                MqttQualityOfServiceLevel.AtLeastOnce,
-                                                false);
-                                }
+                                await AdjustCurrent(fNewChargeCurrent, cc);
                             }
                             Logger.LogInformation($"Adjusted current:{sw.ElapsedMilliseconds} ms");
                         } 
                         else
                         {
                             //Loop through chargers and outlets
-
+                            /* 
+                            foreach (var charger in mCache.cChildren)
+                            {
+                                if(fCurrent>charger.fMaxCurrent) {
+                                    float fOverCurrent=fCurrent-mCache.fMaxCurrent;
+                                    Logger.LogInformation($"Holy Charger, {fCurrent} is {fOverCurrent}A too much!");
+                                    fNewChargeCurrent=(charger.fMaxCurrent-fOverCurrent);
+                                    await AdjustCurrent(fNewChargeCurrent, charger);
+                                }
+                            }
+                            */
                         }
                     }
-
                 }
                 else if(mc is ChargerCache) {
                     var cCache=(ChargerCache)mc;
@@ -248,7 +252,25 @@ namespace powerconcern.mqtt.services
 
             Logger.LogInformation("MQTTService created");
         }
+        private async Task AdjustCurrent(float fNewChargeCurrent, ChargerCache cCache) {
+            //Round down
+            fNewChargeCurrent=(int)fNewChargeCurrent;
+            if(fNewChargeCurrent<2) {
+                fNewChargeCurrent=0;
+            }
+            
+            string sNewChargeCurrent=fNewChargeCurrent.ToString();
 
+            if(cCache.fCurrentSet!=fNewChargeCurrent) {
+                Logger.LogInformation($"Adjusting to {sNewChargeCurrent}");
+                await MqttClnt.PublishAsync($"{cCache.sName}/set/current",
+                            sNewChargeCurrent,
+                            MqttQualityOfServiceLevel.AtLeastOnce,
+                            false);
+            }
+
+            //TODO Store in database
+        }
         private string GetConfigString(string sKey) {
             try {
                 var result=appConfig.First(c=>c.Key.Equals(sKey));
@@ -278,7 +300,14 @@ namespace powerconcern.mqtt.services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            
+            using(var scope = _serviceProvider.CreateScope())
+            {
+                dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                var test=dbContext.Meters.AsQueryable();
+                
+            }
+
             Logger.LogInformation("Background thread started");
 
             var result = await MqttClnt.ConnectAsync(options);

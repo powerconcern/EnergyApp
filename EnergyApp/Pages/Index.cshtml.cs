@@ -46,29 +46,23 @@ namespace EnergyApp.Pages
             //Get user id
             userId =  User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            Partner=_context.Partners.FirstOrDefault(c => c.UserReference == userId);
+            var cmpAssigns=_context.CMPAssignments
+                .Include(p => p.Partner)
+                .Include(m => m.Meter)
+                .Include(c => c.Charger)
+                .AsNoTracking()
+                .Where(c => c.Partner.UserReference ==userId && c.Partner.Type == PartnerType.Kund)
+                .OrderBy(o => o.PartnerID);
+            int PartnerID=0;
 
-            //TODO
-/*             Customer = _context.Customers
-                    .Include(cust => cust.Meters)
-//                        .ThenInclude(e => e.Course)
-                    .AsNoTracking()
-                    .FirstOrDefault(m => m.CustomerNumber == userId);
-            if(Customer != null) {
-                foreach (var meter in Customer.Meters)
-                {   
-                    MeterCache meterCache=(MeterCache)((MQTTService)_mqttsvc).GetBaseCache(meter.Name);
-                    meterCacheList.Add(meterCache);
-                }
-            }
-*/
-/*            var chargers=   from charger in _context.Chargers
-                            join meter in _context.Meters on charger.ID equals meter.ChargerID
-                            join outlet in _context.Outlets on charger.OutletID equals outlet.ID
-                            where meter.ID
-                            select outlet;
-   */                                              
             //Get all chargers and outlets for the user
+            foreach (var assign in cmpAssigns)
+            {
+                if(PartnerID==0||PartnerID==assign.PartnerID) {
+                    //TODO show meters
+                }
+                PartnerID=assign.PartnerID;
+            }
             
             //fMeanCurrent=((MQTTService)_mqttsvc).fMeanCurrent[1];
         }
