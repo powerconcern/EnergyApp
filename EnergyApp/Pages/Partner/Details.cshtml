@@ -1,0 +1,37 @@
+@page
+@model EnergyApp.Pages_Partner.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Partner</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Partner.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Partner.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Partner.UserReference)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Partner.UserReference)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Partner.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Partner.Type)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Partner.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
