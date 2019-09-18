@@ -33,7 +33,7 @@ namespace powerconcern.mqtt.services
         public IMqttClientOptions options;
         
         public CultureInfo culture;
-        private string sTest {get;set;}
+        private string sTestPrefix {get;set;}
 
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
@@ -67,6 +67,7 @@ namespace powerconcern.mqtt.services
                 sBrokerURL=GetConfigString("BrokerURL");
                 sBrokerUser=GetConfigString("BrokerUser");
                 sBrokerPasswd=GetConfigString("BrokerPasswd");
+                sTestPrefix=GetConfigString("TestPrefix");
 
                 try {
                     var assignments=dbContext.CMPAssignments
@@ -241,7 +242,7 @@ namespace powerconcern.mqtt.services
                     else if(e.ApplicationMessage.Topic.Contains("/status/charging"))
                     {
                         cCache.bConnected=ToBool(e.ApplicationMessage.Payload);
-                        Logger.LogInformation($"Got charger maxcurrent:{cCache.fMaxCurrent}, {sw.ElapsedMilliseconds} ms");
+                        Logger.LogInformation($"Got charger charging:{cCache.bConnected}, {sw.ElapsedMilliseconds} ms");
                     }
                 }
 
@@ -288,9 +289,9 @@ namespace powerconcern.mqtt.services
             }
         }
         private bool ToBool(byte[] bArray) {
-            //TODO
-            bool test=false;
-            return test;
+            string s=System.Text.Encoding.UTF8.GetString(bArray);
+
+            return s.Equals('1');
         }
         private float ToFloat(byte[] bArray) {
             float f=0;
@@ -341,7 +342,7 @@ namespace powerconcern.mqtt.services
                         if(cc.bConnected) {
                             if(sNewChargeCurrent != null) {
                                 Logger.LogInformation($"Adjusting up to {sNewChargeCurrent}");
-                                await MqttClnt.PublishAsync($"{cc.sName}/set/current",
+                                await MqttClnt.PublishAsync($"{sTestPrefix}{cc.sName}/set/current",
                                             sNewChargeCurrent,
                                             MqttQualityOfServiceLevel.AtLeastOnce,
                                             false);
