@@ -38,7 +38,7 @@ namespace EnergyApp.Pages
 
         [BindProperty]
         public List<MeterCache> meterCacheList {get;set;}
-        public void OnGet()
+        public async void OnGet()
         {
             //Init cache
             meterCacheList=new List<MeterCache>();
@@ -46,28 +46,22 @@ namespace EnergyApp.Pages
             //Get user id
             userId =  User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var cmpAssigns=_context.CMPAssignments
-                .Include(p => p.Partner)
-                .Include(m => m.Meter)
-                .Include(c => c.Charger)
+            var customer=await _context.Partners
+                .Include(cmp => cmp.CMPAssignments)
+                    .ThenInclude(m => m.Meter)
+                .Include(cmp => cmp.CMPAssignments)
+                    .ThenInclude(c => c.Charger)
                 .AsNoTracking()
-                .Where(c => c.Partner.UserReference ==userId && c.Partner.Type == PartnerType.Kund)
-                .OrderBy(o => o.PartnerID);
-            int PartnerID=0;
+                .FirstOrDefaultAsync(p => p.UserReference == userId && p.Type == PartnerType.Kund);
 
-            //Get all chargers and outlets for the user
-            foreach (var assign in cmpAssigns)
-            {
-                if(PartnerID==0||PartnerID==assign.PartnerID) {
-                    //TODO show meters
-                    ((MQTTService)_mqttsvc).GetBaseCache(assign.Meter.Name);
-                    
-                
-                }
-                PartnerID=assign.PartnerID;
-            }
+            Partner=customer;
             
-            //fMeanCurrent=((MQTTService)_mqttsvc).fMeanCurrent[1];
+            foreach (var meter in customer.CMPAssignments)
+            {
+                //find metercache based on name
+                MeterCache mc=(MeterCache)((MQTTService)_mqttsvc).GetBaseCache(meter.Meter.Name);
+                meterCacheList.Add(mc);
+            }
         }
     }
 }

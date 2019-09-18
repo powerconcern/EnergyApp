@@ -33,7 +33,7 @@ namespace powerconcern.mqtt.services
         public IMqttClientOptions options;
         
         public CultureInfo culture;
-
+        private string sTest {get;set;}
 
         //automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
@@ -131,7 +131,7 @@ namespace powerconcern.mqtt.services
                 }
                 for (int i = 1; i < 4; i++)
                 {
-                    await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"+/current_l{i}/#").Build());
+                    await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"+/status/current_l{i}/#").Build());
                 }
 
                 Console.WriteLine("### SUBSCRIBED to ###");
@@ -231,9 +231,18 @@ namespace powerconcern.mqtt.services
                     var cCache=(ChargerCache)mc;
                     if(e.ApplicationMessage.Topic.Contains("/status/current")) {
                         cCache.fCurrentSet=ToFloat(e.ApplicationMessage.Payload);
-                        Logger.LogInformation($"Got charger current:{sw.ElapsedMilliseconds} ms");
+                        Logger.LogInformation($"Got charger current:{cCache.fCurrentSet}, {sw.ElapsedMilliseconds} ms");
                     }
-                    //TODO EVCS/status/current
+                    else if(e.ApplicationMessage.Topic.Contains("/status/max_current"))
+                    {
+                        cCache.fMaxCurrent=ToFloat(e.ApplicationMessage.Payload);
+                        Logger.LogInformation($"Got charger maxcurrent:{cCache.fMaxCurrent}, {sw.ElapsedMilliseconds} ms");
+                    }
+                    else if(e.ApplicationMessage.Topic.Contains("/status/charging"))
+                    {
+                        cCache.bConnected=ToBool(e.ApplicationMessage.Payload);
+                        Logger.LogInformation($"Got charger maxcurrent:{cCache.fMaxCurrent}, {sw.ElapsedMilliseconds} ms");
+                    }
                 }
 
                 if(e.ApplicationMessage.Topic.Contains("current1d")) {
@@ -278,6 +287,11 @@ namespace powerconcern.mqtt.services
                 return e.Message;
             }
         }
+        private bool ToBool(byte[] bArray) {
+            //TODO
+            bool test=false;
+            return test;
+        }
         private float ToFloat(byte[] bArray) {
             float f=0;
             string s=System.Text.Encoding.UTF8.GetString(bArray);
@@ -320,6 +334,7 @@ namespace powerconcern.mqtt.services
                 foreach(BaseCache cCache in bcLookup.Values) {
                     if(cCache is ChargerCache) {
                         ChargerCache cc = (ChargerCache)cCache;
+
                         //TODO Look per phase for possible current adjustments
                         string sNewChargeCurrent = cc.GetNewChargeCurrent();
 

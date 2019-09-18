@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\EnergyApp\\RelationTest\\RelationTest.csproj": {}
+    "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\EnergyApp\\RelationTest\\RelationTest.csproj": {
+    "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\EnergyApp\\RelationTest\\RelationTest.csproj",
+        "projectUniqueName": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
         "projectName": "RelationTest",
-        "projectPath": "C:\\Dev\\EnergyApp\\RelationTest\\RelationTest.csproj",
-        "packagesPath": "C:\\Users\\Tommy\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\EnergyApp\\RelationTest\\obj\\",
+        "projectPath": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\RelationTest.csproj",
+        "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
+        "outputPath": "c:\\Dev\\lab\\EnergyApp\\RelationTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tommy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\tomekh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
