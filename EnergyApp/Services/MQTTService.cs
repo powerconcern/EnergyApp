@@ -354,7 +354,7 @@ namespace powerconcern.mqtt.services
                         } 
                         else
                         {
-                            Logger.LogInformation($"Could turn {cc.sName} to {sNewChargeCurrent}A");
+                            Logger.LogInformation($"Not connected, but could turn {cc.sName} to {sNewChargeCurrent}A");
                         }
                     }
                 }
