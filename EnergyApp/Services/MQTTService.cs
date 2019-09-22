@@ -159,7 +159,7 @@ namespace powerconcern.mqtt.services
 
                 sw.Start();
 
-                string logstr=$"{DateTime.Now} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                string logstr=$"{DateTime.Now.ToString(culture)} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
                 Logger.LogInformation(logstr);
 
                 //Find charger from chargername or meter from metername
@@ -354,7 +354,7 @@ namespace powerconcern.mqtt.services
                         } 
                         else
                         {
-                            Logger.LogInformation($"Not connected, but could turn {cc.sName} to {sNewChargeCurrent}A");
+                            Logger.LogInformation($"Not connected, but could set {sTestPrefix}{cc.sName} to {sNewChargeCurrent}A");
                         }
                     }
                 }
@@ -415,6 +415,7 @@ namespace powerconcern.mqtt.services
 
         public BaseCache GetBaseCache(string sKey) {
             return bcLookup[sKey];
+            //TODO reread structure if not found
         }
     }
 

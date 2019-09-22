@@ -16,9 +16,27 @@ namespace Energy
         static void Main(string[] args)
         {
             bool IsConnected=false;
+            bool isDebug=false;
 
             //Find replay file
-            string sFile="Replay.txt";
+            string sFile="Replay0909.txt";
+            if(args[0] != null) {
+                sFile=args[0];
+                Console.WriteLine($"Reading from {sFile}");
+            }
+            string sQualifier="2019-";
+            if(args[1] != null) {
+                sQualifier=args[1];
+                Console.WriteLine($"Qualifier {sQualifier}");
+            }
+            if(args[2] != null) {
+                if(args[1].Contains("debug") {
+                    isDebug=true;
+                }
+                Console.WriteLine($"Debugging, no pause");
+            }
+
+
             string sBrokerURL="mqtt.symlink.se";
             string sBrokerUser="johsim:johsim";
             string sBrokerPasswd="UlCoPGgk";
@@ -73,15 +91,18 @@ namespace Energy
             
             Console.WriteLine($"Replaying from {sFile}");
 
-            MessageHandler msgHandler=new MessageHandler("2019-");
+            MessageHandler msgHandler=new MessageHandler(sQualifier);
 
             foreach (string line in File.ReadLines(sFile, Encoding.UTF8))
             {
                 if(msgHandler.HandleRow(line)) {
                     if(msgHandler.NextSection()) {
-                        Console.WriteLine("Press key for next topic post");
-                        Console.Read();
-                        //Thread.Sleep(5000);
+                        if(isDebug) {
+                            Thread.Sleep(5000);
+                        } else {
+                            Console.WriteLine("Press key for next topic post");
+                            Console.Read();
+                        }
                     }
                     string sNewTopic="Test"+msgHandler.Topic;
 
@@ -146,11 +167,17 @@ namespace Energy
                 } else {
                     LastClient=Client;
                     LastPostDTM=PostDTM;
-                    Topic=tmpLine[2];
+                    if(tmpLine[0].Contains('/')) {
+                        //US dateformat
+                        PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1]} {tmpLine[2].Substring(0,2)}", CultureInfo.InvariantCulture);
+                        Topic=tmpLine[3];
+                    } else {
+                        PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1].Substring(0,8)}", CultureInfo.InvariantCulture);
+                        Topic=tmpLine[2];
+                    }
                     sTopicParts=Topic.Split("/");
                     Client=sTopicParts[0];
                     Value=tmpLine[tmpLine.Length-1];
-                    PostDTM=DateTime.Parse($"{tmpLine[0]} {tmpLine[1].Substring(0,8)}", CultureInfo.InvariantCulture);
                     if(LastClient is null) {
                         LastClient=Client;
                         LastPostDTM=PostDTM;
