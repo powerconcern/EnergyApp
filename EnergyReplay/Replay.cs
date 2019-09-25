@@ -17,39 +17,48 @@ namespace Energy
         {
             bool IsConnected=false;
             bool isDebug=false;
+            int msPause=5000;
 
             //Find replay file
             string sFile="Replay0909.txt";
-            if(args[0] != null) {
+            if(args.Length>0&&args[0] != null) {
                 sFile=args[0];
                 Console.WriteLine($"Reading from {sFile}");
             }
             string sQualifier="2019-";
-            if(args[1] != null) {
+            if(args.Length>1&&args[1] != null) {
                 sQualifier=args[1];
                 Console.WriteLine($"Qualifier {sQualifier}");
             }
-            if(args[2] != null) {
-                if(args[1].Contains("debug") {
+            if(args.Length>2&&args[2] != null) {
+                if(args[2].Equals("0")) {
+                    isDebug=false;
+                    Console.WriteLine($"Pausing between sections until keypress");
+                } else {
                     isDebug=true;
+                    msPause=int.Parse(args[2]);
+                    Console.WriteLine($"Debugging, pause {msPause} ms");
                 }
-                Console.WriteLine($"Debugging, no pause");
             }
 
 
-            string sBrokerURL="mqtt.symlink.se";
-            string sBrokerUser="johsim:johsim";
-            string sBrokerPasswd="UlCoPGgk";
+//            string sBrokerURL="mqtt.symlink.se";
+//            string sBrokerUser="johsim:johsim";
+//            string sBrokerPasswd="UlCoPGgk";
+
+            string sBrokerURL="192.168.222.20";
+//            string sBrokerUser="johsim:johsim";
+            //string sBrokerPasswd="UlCoPGgk";
 
             MqttFactory Factory=new MqttFactory();
 
             IMqttClient MqttClnt=Factory.CreateMqttClient();
 
             IMqttClientOptions options = new MqttClientOptionsBuilder()
-            .WithClientId(Guid.NewGuid().ToString())
+            .WithClientId("EnergyAppTester")
             .WithTcpServer(sBrokerURL)
-            .WithCredentials(sBrokerUser, sBrokerPasswd)
-            .WithCleanSession()
+            //.WithCredentials(sBrokerUser, sBrokerPasswd)
+            //.WithCleanSession()
             .Build();
 
             //var result = MqttClnt.ConnectAsync(options);
@@ -88,7 +97,6 @@ namespace Energy
 
             var result = MqttClnt.ConnectAsync(options);
             
-            
             Console.WriteLine($"Replaying from {sFile}");
 
             MessageHandler msgHandler=new MessageHandler(sQualifier);
@@ -98,10 +106,10 @@ namespace Energy
                 if(msgHandler.HandleRow(line)) {
                     if(msgHandler.NextSection()) {
                         if(isDebug) {
-                            Thread.Sleep(5000);
+                            Thread.Sleep(msPause);
                         } else {
                             Console.WriteLine("Press key for next topic post");
-                            Console.Read();
+                            Console.ReadLine();
                         }
                     }
                     string sNewTopic="Test"+msgHandler.Topic;
@@ -117,7 +125,7 @@ namespace Energy
                     msgHandler.Value,
                     MqttQualityOfServiceLevel.AtLeastOnce,
                     false);
-                    Console.WriteLine($"Sent {msgHandler.Value} to {sNewTopic}");
+                    Console.WriteLine($"Sent {msgHandler.Value} to {sNewTopic} (time {msgHandler.PostDTM})");
                 }
             }
         }
@@ -127,7 +135,7 @@ namespace Energy
     //Class to handle messages for MQTT topics in replayfile
     public class MessageHandler {
         private DateTime LastPostDTM {get;set;}
-        private DateTime PostDTM {get;set;}
+        public DateTime PostDTM {get;set;}
         private string[] sTopicParts;
         private string LastClient {get;set;}
         private string Client {get;set;}
@@ -160,11 +168,11 @@ namespace Energy
             bool bHandled=false;
             if(line.Contains(Qualifier)) {
                 //Set Topic and Value
-                string[] tmpLine=line.Trim().Split(" ");
-                if(tmpLine[2].Contains("Test")) {
+                if(line.Contains("Test")) {
                     Console.WriteLine($"Filtering out {line}");
                     bHandled=false;
                 } else {
+                    string[] tmpLine=line.Trim().Split(" ");
                     LastClient=Client;
                     LastPostDTM=PostDTM;
                     if(tmpLine[0].Contains('/')) {

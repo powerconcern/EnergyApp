@@ -96,6 +96,7 @@ namespace powerconcern.mqtt.services
                             chargerCache.bcParent=meterCache;
                             chargerCache.sName=chitem.Name;
                             chargerCache.iPhases=7;
+                            meterCache.cChildren.Add(chargerCache);
                             bcLookup.Add(chitem.Name, chargerCache);
                         }
                         catch (System.Exception e)
@@ -113,10 +114,9 @@ namespace powerconcern.mqtt.services
 
             //MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
             options = new MqttClientOptionsBuilder()
-            .WithClientId(Guid.NewGuid().ToString())
+            .WithClientId("EnergyApp")
             .WithTcpServer(sBrokerURL)
             .WithCredentials(sBrokerUser, sBrokerPasswd)
-            .WithCleanSession()
             .Build();
 
             //var result = MqttClnt.ConnectAsync(options);
@@ -135,7 +135,7 @@ namespace powerconcern.mqtt.services
                     await MqttClnt.SubscribeAsync(new TopicFilterBuilder().WithTopic($"+/status/current_l{i}/#").Build());
                 }
 
-                Console.WriteLine("### SUBSCRIBED to ###");
+                Console.WriteLine("### SUBSCRIBED ###");
             });
             #endregion
 
@@ -190,7 +190,7 @@ namespace powerconcern.mqtt.services
                         mCache.fMeterCurrent[iPhase]=fCurrent;
                         mCache.fMeanCurrent[iPhase]=(2 * mCache.fMeanCurrent[iPhase]+fCurrent)/3;
                         Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}");
-                        float fNewChargeCurrent;
+                        float fSuggestedCurrentChange;
                         //Calculate new value
                         if(fCurrent>mCache.fMaxCurrent) {
                             Logger.LogInformation($"Overload meter:{sw.ElapsedMilliseconds} ms");
@@ -198,18 +198,24 @@ namespace powerconcern.mqtt.services
                             float fOverCurrent=fCurrent-mCache.fMaxCurrent;
                             Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much!");
                             
-                            var chargers=mCache.cChildren.Select(m => m.GetType().Equals("Charger"));
+                            //Check all chargers that is connected
+                            var connChargers=mCache.cChildren.Where(m => m.bConnected);
 
                             //Set new current
                             //Number of chargers to even out on
-                            int iChargers=mCache.cChildren.Count;
+                            int iChargers=connChargers.Count();
 
-                            fNewChargeCurrent=(mCache.fMaxCurrent-fOverCurrent)/iChargers;
+                            fSuggestedCurrentChange=(-fOverCurrent)/iChargers;
 
-                            foreach(ChargerCache cc in mCache.cChildren) {
-                                await AdjustCurrent(fNewChargeCurrent, cc);
+                            foreach(ChargerCache cc in connChargers) {
+
+                                //TODO Handle the case where one charger uses less current than given.
+                                //TODO Distribute to the others.
+                                
+                                float fNewCurrent=cc.AdjustNewChargeCurrent(fSuggestedCurrentChange);
+                                PostAdjustedCurrent(fNewCurrent, cc);
                             }
-                            Logger.LogInformation($"Adjusted current:{sw.ElapsedMilliseconds} ms");
+                            Logger.LogInformation($"Adjusted current for {mCache.sName}:{sw.ElapsedMilliseconds} ms");
                         } 
                         else
                         {
@@ -261,21 +267,22 @@ namespace powerconcern.mqtt.services
 
             Logger.LogInformation("MQTTService created");
         }
-        private async Task AdjustCurrent(float fNewChargeCurrent, ChargerCache cCache) {
-            //Round down
-            fNewChargeCurrent=(int)fNewChargeCurrent;
-            if(fNewChargeCurrent<2) {
-                fNewChargeCurrent=0;
-            }
-            
+        private async Task PostAdjustedCurrent(float fNewChargeCurrent, ChargerCache cCache) {
+            Stopwatch sw = new Stopwatch();
+
+            sw.Start();
+
             string sNewChargeCurrent=fNewChargeCurrent.ToString();
 
             if(cCache.fCurrentSet!=fNewChargeCurrent) {
-                Logger.LogInformation($"Adjusting to {sNewChargeCurrent}");
-                await MqttClnt.PublishAsync($"{cCache.sName}/set/current",
+                Logger.LogInformation($"Adjusting {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
+                await MqttClnt.PublishAsync($"{sTestPrefix}{cCache.sName}/set/current",
                             sNewChargeCurrent,
                             MqttQualityOfServiceLevel.AtLeastOnce,
                             false);
+                Logger.LogInformation($"Adjusted {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
+            } else {
+                Logger.LogInformation($"{sTestPrefix}{cCache.sName} already at {sNewChargeCurrent}A");
             }
 
             //TODO Store in database
@@ -291,7 +298,7 @@ namespace powerconcern.mqtt.services
         private bool ToBool(byte[] bArray) {
             string s=System.Text.Encoding.UTF8.GetString(bArray);
 
-            return s.Equals('1');
+            return s.Equals("1");
         }
         private float ToFloat(byte[] bArray) {
             float f=0;
@@ -332,29 +339,35 @@ namespace powerconcern.mqtt.services
                 await Task.Delay(30000, stoppingToken);
 
                 //Check if we can increase the charge current
+                //Loop through meters
                 foreach(BaseCache cCache in bcLookup.Values) {
-                    if(cCache is ChargerCache) {
-                        ChargerCache cc = (ChargerCache)cCache;
+                    if(cCache is MeterCache) {
+                        MeterCache mc = (MeterCache)cCache;
+                        
+                        //Get max current we can increase with
+                        //Checks all phases
+                        Logger.LogInformation($"{mc.sName}, checking possible currentChange");
+                        //TODO Check one phase at a time
+                        float fSuggestedCurrentChange=mc.GetMaxPhaseAddCurrent(7);
 
-                        //TODO Look per phase for possible current adjustments
-                        string sNewChargeCurrent = cc.GetNewChargeCurrent();
+                        //Check all chargers that is connected
+                        var connChargers=mc.cChildren.Where(m => m.bConnected);
 
-                        if(cc.bConnected) {
-                            if(sNewChargeCurrent != null) {
-                                Logger.LogInformation($"Adjusting up to {sNewChargeCurrent}");
-                                await MqttClnt.PublishAsync($"{sTestPrefix}{cc.sName}/set/current",
-                                            sNewChargeCurrent,
-                                            MqttQualityOfServiceLevel.AtLeastOnce,
-                                            false);
-                                
-                                //Get info in temp vars
-                                //var fCurrent=ToFloat(e.ApplicationMessage.Payload);
-                                //int iPhase=Int16.Parse(e.ApplicationMessage.Topic.Substring(e.ApplicationMessage.Topic.Length-1));
-                            }
-                        } 
-                        else
-                        {
-                            Logger.LogInformation($"Not connected, but could set {sTestPrefix}{cc.sName} to {sNewChargeCurrent}A");
+                        //Set new current
+                        //Number of chargers to even out on
+                        int iChargers=connChargers.Count();
+
+                        Logger.LogInformation($"{mc.sName}, possible currentChange for {iChargers} chargers: {fSuggestedCurrentChange}A");
+
+                        fSuggestedCurrentChange=fSuggestedCurrentChange/iChargers;
+
+                        foreach(ChargerCache cc in connChargers) {
+
+                            //TODO Handle the case where one charger uses less current than given.
+                            //TODO Distribute to the others.
+
+                            float fNewCurrent=cc.AdjustNewChargeCurrent(fSuggestedCurrentChange);
+                            await PostAdjustedCurrent(fNewCurrent, cc);
                         }
                     }
                 }
@@ -466,22 +479,41 @@ namespace powerconcern.mqtt.services
         public float fCurrentSet;
         public bool bConnected;
         public int iPhases=0;
+        /// <summary>
+        /// Calculates new chargercurrent
+        /// </summary>
+        /// <returns></returns>
         public string GetNewChargeCurrent()
         {
             //Get max current that meter could handle
             float fCurrentMaxAdd=((MeterCache)bcParent).GetMaxPhaseAddCurrent(iPhases);
 
             //Can the charger handle that too?
-            //TODO Get this from Outlet instead
+            //TODO Get this from Outlet instead. Or don't - maybe not necessary
 
             //Current to increase with
-            float fNewChargeCurrent=fCurrentSet+fCurrentMaxAdd;
-            if(fNewChargeCurrent>fMaxCurrent) {
-                fNewChargeCurrent=fMaxCurrent;
-            }
+            float fSuggestedCurrentChange=fCurrentMaxAdd-fCurrentSet;
+            float fNewChargeCurrent=AdjustNewChargeCurrent(fSuggestedCurrentChange);
 
             //Max current to increase with
             return fNewChargeCurrent.ToString("0");
+        }
+        /// <summary>
+        /// Adjusts for max and min current
+        /// </summary>
+        /// <param name="fSuggestedCurrentChange"></param>
+        /// <returns></returns>
+        public float AdjustNewChargeCurrent(float fSuggestedCurrentChange) {
+            float fNewIncomingCurrent=fCurrentSet+fSuggestedCurrentChange;
+
+            if(fNewIncomingCurrent>fMaxCurrent) {
+                fNewIncomingCurrent=fMaxCurrent;
+            }
+            if(fNewIncomingCurrent<2) {
+                fNewIncomingCurrent=0;
+            }
+            //Round down
+            return (int)fNewIncomingCurrent;
         }
     }
 }

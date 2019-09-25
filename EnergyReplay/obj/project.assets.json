@@ -5091,27 +5091,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tommy\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\tomekh\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Dev\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
+      "projectUniqueName": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
       "projectName": "EnergyReplay",
-      "projectPath": "c:\\Dev\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
-      "packagesPath": "C:\\Users\\Tommy\\.nuget\\packages\\",
-      "outputPath": "c:\\Dev\\EnergyApp\\EnergyReplay\\obj\\",
+      "projectPath": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\EnergyReplay.csproj",
+      "packagesPath": "C:\\Users\\tomekh\\.nuget\\packages\\",
+      "outputPath": "C:\\Dev\\lab\\EnergyApp\\EnergyReplay\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tommy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\tomekh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
