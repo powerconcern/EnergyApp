@@ -179,7 +179,6 @@ namespace powerconcern.mqtt.services
 
                 //Check current from the highest meter to the charger
                 if(mc is MeterCache) {
-                    Logger.LogInformation($"Found mCache:{sw.ElapsedMilliseconds} ms");
                     MeterCache mCache=(MeterCache)mc;
                     if(e.ApplicationMessage.Topic.Contains("current_l")) {
                         //Get info in temp vars
@@ -189,14 +188,13 @@ namespace powerconcern.mqtt.services
                         //Store in cache
                         mCache.fMeterCurrent[iPhase]=fCurrent;
                         mCache.fMeanCurrent[iPhase]=(2 * mCache.fMeanCurrent[iPhase]+fCurrent)/3;
-                        Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}");
+                        Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}, time {sw.ElapsedMilliseconds} ms");
                         float fSuggestedCurrentChange;
                         //Calculate new value
                         if(fCurrent>mCache.fMaxCurrent) {
-                            Logger.LogInformation($"Overload meter:{sw.ElapsedMilliseconds} ms");
                             //What's the overcurrent?
                             float fOverCurrent=fCurrent-mCache.fMaxCurrent;
-                            Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much!");
+                            Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much! Time {sw.ElapsedMilliseconds} ms");
                             
                             //Check all chargers that is connected
                             var connChargers=mCache.cChildren.Where(m => m.bConnected);
