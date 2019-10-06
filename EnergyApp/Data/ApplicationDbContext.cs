@@ -54,6 +54,11 @@ namespace EnergyApp.Data
         /// 
         /// </summary>
         /// <param name="builder"></param>
+        public DbSet<ChargeSession> ChargeSession { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CMPAssignment>()

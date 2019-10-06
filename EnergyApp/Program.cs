@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace EnergyApp
 {
@@ -20,6 +21,15 @@ namespace EnergyApp
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://*:5000", "https://*:5001")
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureLogging(logging =>
+                        {
+                            logging.ClearProviders();
+                            logging.AddConsole(c =>
+                            {
+                                c.IncludeScopes=true;
+                                //From 3.0 c.TimestampFormat = "[HH:mm:ss] ";
+                            });
+                        });
     }
 }
