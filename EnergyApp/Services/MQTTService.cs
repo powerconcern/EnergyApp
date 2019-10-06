@@ -26,7 +26,7 @@ namespace powerconcern.mqtt.services
         private readonly IServiceProvider _serviceProvider;
         private ApplicationDbContext dbContext;
         private List<Configuration> appConfig;
-        public ILogger Logger { get; }
+        public ILogger log { get; }
         public MqttFactory Factory { get; }
         public IMqttClient MqttClnt {get; }
         
@@ -35,7 +35,7 @@ namespace powerconcern.mqtt.services
         public CultureInfo culture;
         private string sTestPrefix {get;set;}
 
-        //automatically passes the logger factory in to the constructor via dependency injection
+        //Automatically passes the logger factory in to the constructor via dependency injection
         public MQTTService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             //Get serviceprovider so we later can connect to databasemodel from it.
@@ -51,8 +51,8 @@ namespace powerconcern.mqtt.services
 
             MqttClnt=Factory.CreateMqttClient();
 
-            Logger = loggerFactory?.CreateLogger("MQTTSvc");
-            if(Logger == null)
+            log = loggerFactory?.CreateLogger("MQTTSvc");
+            if(log == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
             }
@@ -101,15 +101,15 @@ namespace powerconcern.mqtt.services
                         }
                         catch (System.Exception e)
                         {
-                            Logger.LogError(e.Message);
+                            log.LogError(e.Message);
                         }
                     }
                 } catch(Exception e) {
-                    Logger.LogWarning(e.Message);
+                    log.LogWarning(e.Message);
                     //fMaxCurrent=-1;
-                    Logger.LogInformation($"MaxCurrent error: {e.Message}");
+                    log.LogInformation($"MaxCurrent error: {e.Message}");
                 }
-                Logger.LogInformation($"BrokerURL:{sBrokerURL}");
+                log.LogInformation($"BrokerURL:{sBrokerURL}");
             }
 
             //MqttNetGlobalLogger.LogMessagePublished += OnTraceMessagePublished;
@@ -160,7 +160,7 @@ namespace powerconcern.mqtt.services
                 sw.Start();
 
                 string logstr=$"{DateTime.Now.ToString(culture)} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
-                Logger.LogInformation(logstr);
+                log.LogInformation(logstr);
 
                 //Find charger from chargername or meter from metername
                 string[] topic=e.ApplicationMessage.Topic.Split('/');
@@ -172,7 +172,7 @@ namespace powerconcern.mqtt.services
                 }
                 catch (System.Exception)
                 {
-                    Logger.LogInformation($"Cannot find {topic[0]}");
+                    log.LogInformation($"Cannot find {topic[0]}");
                     mc=null;
                 }
                 //TODO What happens if not found
@@ -188,13 +188,13 @@ namespace powerconcern.mqtt.services
                         //Store in cache
                         mCache.fMeterCurrent[iPhase]=fCurrent;
                         mCache.fMeanCurrent[iPhase]=(2 * mCache.fMeanCurrent[iPhase]+fCurrent)/3;
-                        Logger.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}, time {sw.ElapsedMilliseconds} ms");
+                        log.LogInformation($"Phase: {iPhase}; Current: {fCurrent}; Mean Current: {mCache.fMeanCurrent[iPhase]}, time {sw.ElapsedMilliseconds} ms");
                         float fSuggestedCurrentChange;
                         //Calculate new value
                         if(fCurrent>mCache.fMaxCurrent) {
                             //What's the overcurrent?
                             float fOverCurrent=fCurrent-mCache.fMaxCurrent;
-                            Logger.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much! Time {sw.ElapsedMilliseconds} ms");
+                            log.LogInformation($"Holy Moses, {fCurrent} is {fOverCurrent}A too much! Time {sw.ElapsedMilliseconds} ms");
                             
                             //Check all chargers that is connected
                             var connChargers=mCache.cChildren.Where(m => m.bConnected);
@@ -211,9 +211,9 @@ namespace powerconcern.mqtt.services
                                 //TODO Distribute to the others.
                                 
                                 float fNewCurrent=cc.AdjustNewChargeCurrent(fSuggestedCurrentChange);
-                                PostAdjustedCurrent(fNewCurrent, cc);
+                                PostAdjustedCurrent(fNewCurrent, cc,sw);
                             }
-                            Logger.LogInformation($"Adjusted current for {mCache.sName}:{sw.ElapsedMilliseconds} ms");
+                            log.LogInformation($"New charging current for {mCache.sName} initiated:{sw.ElapsedMilliseconds} ms");
                         } 
                         else
                         {
@@ -236,17 +236,17 @@ namespace powerconcern.mqtt.services
                     var cCache=(ChargerCache)mc;
                     if(e.ApplicationMessage.Topic.Contains("/status/current")) {
                         cCache.fCurrentSet=ToFloat(e.ApplicationMessage.Payload);
-                        Logger.LogInformation($"Got charger current:{cCache.fCurrentSet}, {sw.ElapsedMilliseconds} ms");
+                        log.LogInformation($"Got charger current:{cCache.fCurrentSet}, {sw.ElapsedMilliseconds} ms");
                     }
                     else if(e.ApplicationMessage.Topic.Contains("/status/max_current"))
                     {
                         cCache.fMaxCurrent=ToFloat(e.ApplicationMessage.Payload);
-                        Logger.LogInformation($"Got charger maxcurrent:{cCache.fMaxCurrent}, {sw.ElapsedMilliseconds} ms");
+                        log.LogInformation($"Got charger maxcurrent:{cCache.fMaxCurrent}, {sw.ElapsedMilliseconds} ms");
                     }
                     else if(e.ApplicationMessage.Topic.Contains("/status/charging"))
                     {
                         cCache.bConnected=ToBool(e.ApplicationMessage.Payload);
-                        Logger.LogInformation($"Got charger charging:{cCache.bConnected}, {sw.ElapsedMilliseconds} ms");
+                        log.LogInformation($"Got charger charging:{cCache.bConnected}, {sw.ElapsedMilliseconds} ms");
                     }
                 }
 
@@ -259,31 +259,29 @@ namespace powerconcern.mqtt.services
                     //bw.Flush();
                     bw.Close();
                 }
-                Logger.LogInformation($"Receive end:{sw.ElapsedMilliseconds} ms");
+                log.LogInformation($"Receive end:{sw.ElapsedMilliseconds} ms");
                 sw.Stop();
             });
 
-            Logger.LogInformation("MQTTService created");
+            log.LogInformation("MQTTService created");
         }
-        private async Task PostAdjustedCurrent(float fNewChargeCurrent, ChargerCache cCache) {
-            Stopwatch sw = new Stopwatch();
-
-            sw.Start();
+        private async Task PostAdjustedCurrent(float fNewChargeCurrent, ChargerCache cCache, Stopwatch sw) {
 
             string sNewChargeCurrent=fNewChargeCurrent.ToString();
 
             if(cCache.fCurrentSet!=fNewChargeCurrent) {
-                Logger.LogInformation($"Adjusting {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
+                log.LogInformation($"Adjusting {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
                 await MqttClnt.PublishAsync($"{sTestPrefix}{cCache.sName}/set/current",
                             sNewChargeCurrent,
                             MqttQualityOfServiceLevel.AtLeastOnce,
                             false);
-                Logger.LogInformation($"Adjusted {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
+                log.LogInformation($"Adjusted {sTestPrefix}{cCache.sName} to {sNewChargeCurrent}A, time {sw.ElapsedMilliseconds} ms");
             } else {
-                Logger.LogInformation($"{sTestPrefix}{cCache.sName} already at {sNewChargeCurrent}A");
+                log.LogInformation($"{sTestPrefix}{cCache.sName} already at {sNewChargeCurrent}A");
             }
 
             //TODO Store in database
+
         }
         private string GetConfigString(string sKey) {
             try {
@@ -308,7 +306,7 @@ namespace powerconcern.mqtt.services
             }
             catch (System.Exception)
             {
-                Logger.LogError($"Unable to parse {s}");
+                log.LogError($"Unable to parse {s}");
             }
             return f;
         }
@@ -327,10 +325,10 @@ namespace powerconcern.mqtt.services
                 
             }
 
-            Logger.LogInformation("Background thread started");
+            log.LogInformation("Background thread started");
 
             var result = await MqttClnt.ConnectAsync(options);
-            Logger.LogInformation($"Connection result: {result.ResponseInformation}");
+            log.LogInformation($"Connection result: {result.ResponseInformation}");
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -344,7 +342,7 @@ namespace powerconcern.mqtt.services
                         
                         //Get max current we can increase with
                         //Checks all phases
-                        Logger.LogInformation($"{mc.sName}, checking possible currentChange");
+                        log.LogInformation($"{mc.sName}, checking possible currentChange");
                         //TODO Check one phase at a time
                         float fSuggestedCurrentChange=mc.GetMaxPhaseAddCurrent(7);
 
@@ -355,7 +353,7 @@ namespace powerconcern.mqtt.services
                         //Number of chargers to even out on
                         int iChargers=connChargers.Count();
 
-                        Logger.LogInformation($"{mc.sName}, possible currentChange for {iChargers} chargers: {fSuggestedCurrentChange}A");
+                        log.LogInformation($"{mc.sName}, possible currentChange for {iChargers} chargers: {fSuggestedCurrentChange}A");
 
                         fSuggestedCurrentChange=fSuggestedCurrentChange/iChargers;
 
@@ -372,7 +370,7 @@ namespace powerconcern.mqtt.services
                 Console.WriteLine("Background svc looping");
             }
 
-            stoppingToken.Register(() => Logger.LogDebug($" MQTTSvc background task is stopping."));
+            stoppingToken.Register(() => log.LogDebug($" MQTTSvc background task is stopping."));
 
 
 /* Python rules
