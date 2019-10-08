@@ -10,12 +10,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">SiteInfo</h1>
+    <h1 class="display-4">Powerconcern</h1>
     <br/>
     <p>User ID:@Model.userId</p>
     <br/>
-    <p>Current charger amps:@Model.fMeanCurrent</p>
+    <h2>Charger Info</h2>
     <br/>
+    <p></p>
     @if(@Model.Partner!=null) {
         <p>Meter(s) for @Model.Partner.Name</p>
         <table class="table">
@@ -25,21 +26,46 @@
                 <th>L2</th>
                 <th>L3</th>
             </tr>
-            @foreach (var item in Model.meterCacheList)
+            @foreach (var meter in Model.meterCacheList)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.sName)
+                        @Html.DisplayFor(modelItem => meter.sName)
                     </td>
                     @{
                         for (int i = 1; i < 4; i++)
                         {
                             <td>
-                                @FloatFormat(item.fMeanCurrent[i])
+                                @FloatFormat(meter.fMeanCurrent[i])
                             </td>
                         }
                     }
                 </tr>
+                <table class=table>
+                    <p>Charger(s) for @meter.sName</p>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>L2</th>
+                        <th>L3</th>
+                    </tr>
+                    @foreach (var charger in meter.cChildren)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => charger.sName)
+                            </td>
+                            @{
+                                for (int i = 1; i < 4; i++)
+                                {
+                                    <td>
+                                        @FloatFormat(charger.fCurrentSet)
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </table>
             }
         </table>
     } else

@@ -216,7 +216,7 @@ namespace powerconcern.mqtt.services
                                 float fNewCurrent = cc.AdjustNewChargeCurrent(fSuggestedCurrentChange);
 
                                 //TODO Might hang with await
-                                await PostAdjustedCurrent(fNewCurrent, cc);
+                                PostAdjustedCurrent(fNewCurrent, cc);
                             }
                             LogInformation($"New charging current for {mCache.sName}");
                         }
