@@ -157,7 +157,7 @@ namespace powerconcern.mqtt.services
                 }
             });
 
-            MqttClnt.UseApplicationMessageReceivedHandler(async e =>
+            MqttClnt.UseApplicationMessageReceivedHandler(e =>
             {
                 LogInformation($"IncomingMsg;{e.ApplicationMessage.Topic};{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
 
